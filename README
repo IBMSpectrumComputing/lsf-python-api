@@ -6,7 +6,20 @@ Last modified: 16 October 2013
 
 
 Python wrapper for LSF APIs
-===========================
+
+==========================
+CONTENTS
+==========================
+ 
+ Introduction
+ Installation
+ Release Notes
+ Community Contribution
+ Copyright
+
+==========================
+Introduction
+==========================
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the Eclipse Public License.
@@ -16,81 +29,51 @@ by using SWIG. Some commands are left out and some typemaps are defined.
 Not all API calls are supported. Please see the following list for
 tested and supported calls.
 
-The following calls are tested and known to work reasonably well:
 
-  Included from batch.h:
-  * lsb_init
-  * lsb_submit
+==========================
+Installation
+==========================
 
+Before compiling the library, LSF environment variables should set firstly.
 
-  Included from lsf.h:
-  * ls_info
-  * ls_getclustername
-  * ls_getmastername
-  * ls_gethosttype
-  * ls_gethostmodel 
-  * ls_gethostinfo
-  * ls_loadinfo
-  * ls_load
-  * ls_loadofhosts
+To compile and install the library, go to the main source directory
+and type:
 
+  $ python setup.py build
+  $ sudo python setup.py install
 
-The following calls are not tested:
-  * ls_sharedresourceinfo 
-  * ls_placereq
-  * ls_placeofhosts
-  * ls_loadadj
-  * ls_eligible
-  * ls_listrtask
-  * ls_listltask
-  * ls_insertrtask 
-  * ls_insertltask
-  * ls_deletertask
-  * ls_deleteltask
-  * all remote execution routines
+==========================
+Release Notes
+==========================
 
+Release 1.0.1
 
-The following calls are unknown:
-  * ls_getmodelfactor
-  * ls_gethostfactor
-
-
-Convenient routines
--------------------
-
-The following routines were added for your convenience:
-
+- This is the first release from IBM Platform Computing.
+- Tested with LSF 9.1.2 on Linux 2.6.
+- Besides the wrapper for LSF APIs, added the following routines for convenience:
   * get_load_of_hosts() - Return a list of hostLoad objects.
   * get_host_names()    - Return the name of the hosts in the cluster.
   * get_host_info()     - Return a list of hostInfo objects.
   * get_host_load()     - Return the current values for the resources of a host.
-    Possible resource names (use lsf.<name>) values:
 
-    R15S - 15s exponentially averaged CPU run queue length.
-    R1M  - 1m exponentially averaged CPU run queue length.
-    R15M - 15m exponentially averaged CPU run queue length.
-    UT   - CPU utilization exponentially averaged over the last minute (from 0.0 to 1.0).
-    PG   - Memory paging rate exponentially averaged over the last minute, in pages per second.
-    IO   - Disk I/O rate exponentially averaged over the last minute, in KBytes per second.
-    LS   - Number of users currently logged in.
-    IT   - Idle time of the host (keyboard not touched on all logged in sessions), in minutes.
-    TMP  - Available free disk space in /tmp, in MBytes.
-    SWP  - Amount of currently available swap space, in MBytes.
-    MEM  - Amount of currently available memory, in MBytes.
+==========================
+Community Contribution
+==========================
+ Community contributions to this branch need to follow the IBM 
+ DCO(Developer's Certificate of Origin) process:
 
+ 1. Contributor proposes new code to community.
 
-Notes
------
+ 2. Contributor signs off on contributions, 
+    i.e. attach the DCO to ensure contributor is either the code 
+    originator or has rights to publish. The template of the DCO is included in
+    this package.
+ 
+ 3. LSF Development reviews contribution to check for
+    i) applicability and relevancy of functional contents and 
+    ii) any obvious issues.
 
-  * You may need to set PYTHONPATH (pointing to the _lsf.so dir) and 
-    LD_LIBRARY_PATH correctly (LSF_LIBDIR needs to be included).
-
-  * On Solaris use 'export LD_PRELOAD=libsocket.so.1' and 
-    '/usr/bin/amd64/python'
-
-  * ctypes are not used because the LSF libs tend to have undefined vars on 
-    some platforms. The SWIG approach is more flexible with that issue.
-
+ 4. If Accept, post contribution, if Reject, back to contributor and no posting.
 
 
 =========================
