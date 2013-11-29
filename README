@@ -23,7 +23,7 @@ Introduction
 This library allows you to call the LSF APIs from Python. The wrapper is created
 by using SWIG. 
 
-IBM Platform Computing will provide formal support for this sofeware, 
+IBM Platform Computing will provide formal support for this software, 
 to entitled clients, via the normal IBM support channels.
 
 This software is under the Eclipse Public License.
