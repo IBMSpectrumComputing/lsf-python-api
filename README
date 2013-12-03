@@ -1,10 +1,11 @@
 Readme file for: LSF
 Product/Component Release: 9.1.2
 Publication date: 16 October 2013
-Last modified: 16 October 2013
+Last modified: 2 December 2013
 
 
 Python wrapper for LSF APIs
+
 
 ==========================
 CONTENTS
@@ -16,6 +17,7 @@ CONTENTS
  Community Contribution
  Copyright
  
+
 ==========================
 Introduction
 ==========================
@@ -23,22 +25,24 @@ Introduction
 This library allows you to call the LSF APIs from Python. The wrapper is created
 by using SWIG. 
 
-IBM Platform Computing will provide formal support for this software, 
-to entitled clients, via the normal IBM support channels.
+IBM Platform Computing will provide formal support for this software  
+to entitled clients via the normal IBM support channels.
 
 This software is under the Eclipse Public License.
+
 
 ==========================
 Installation
 ==========================
 
-Before compiling the library, LSF environment variables should set firstly.
+Before compiling the library, set the LSF environment variables.
 
 To compile and install the library, go to the main source directory
 and type:
 
   $ python setup.py build
   $ sudo python setup.py install
+
 
 ==========================
 Release Notes
@@ -48,30 +52,32 @@ Release 1.0.1
 
 - This is the first release from IBM Platform Computing.
 - Tested with LSF 9.1.2 on Linux 2.6.
-- Besides the wrapper for LSF APIs, added the following routines for convenience:
-  * get_load_of_hosts() - Return a list of hostLoad objects.
-  * get_host_names()    - Return the name of the hosts in the cluster.
-  * get_host_info()     - Return a list of hostInfo objects.
-  * get_host_load()     - Return the current values for the resources of a host.
+- In addition to the wrapper for LSF APIs, the following routines were added:
+  * get_load_of_hosts() - Returns a list of hostLoad objects.
+  * get_host_names()    - Returns the name of the hosts in the cluster.
+  * get_host_info()     - Returns a list of hostInfo objects.
+  * get_host_load()     - Returns the current values for the resources of a host.
+
 
 ==========================
 Community Contribution
 ==========================
- Community contributions to this branch need to follow the IBM 
- DCO(Developer's Certificate of Origin) process:
+
+Community contributions to this branch must follow the IBM 
+Developer's Certificate of Origin (DCO) process:
 
  1. Contributor proposes new code to community.
 
- 2. Contributor signs off on contributions, 
-    i.e. attach the DCO to ensure contributor is either the code 
+ 2. Contributor signs off on contributions 
+    (i.e. attachs the DCO to ensure contributor is either the code 
     originator or has rights to publish. The template of the DCO is included in
-    this package.
+    this package).
  
- 3. LSF Development reviews contribution to check for
-    i) applicability and relevancy of functional contents and 
-    ii) any obvious issues.
+ 3. LSF Development reviews contribution to check for:
+    i)  Applicability and relevancy of functional content 
+    ii) Any obvious issues
 
- 4. If Accept, post contribution, if Reject, back to contributor and no posting.
+ 4. If accepted, posts contribution. If rejected, work goes back to contributor and is not posted.
 
 
 =========================
