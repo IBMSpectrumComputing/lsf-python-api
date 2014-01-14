@@ -11,6 +11,8 @@
 %include "cpointer.i"
 %include "carrays.i"
 
+FILE *fopen(char *filename, char *mode);
+int fclose(FILE *f);
 
 %{
 #define SWIG_FILE_WITH_INIT
