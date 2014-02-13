@@ -13,6 +13,14 @@ def display(eventrec):
         queue = eventrec.eventLog.jobNewLog.queue
         cwd = eventrec.eventLog.jobNewLog.cwd
         print("EVENT_JOB_NEW jobid<%d>, fromHost<%s>, to Queue<%s>, CWD<%s>" %(jobid, fromHost, queue, cwd))
+    elif eventrec.type == lsf.EVENT_JOB_START:
+        numHosts = eventrec.eventLog.jobStartLog.numExHosts
+        execHosts = eventrec.eventLog.jobStartLog.execHosts
+        execHostList = lsf.char_p_p_to_pylist(execHosts, numHosts)
+        hoststr = ""
+        for host in execHostList:
+            hoststr += host + " "
+        print("EVENT_JOB_START execHosts<%s>" %(hoststr))
     else:
         print("event type is %d" %(eventrec.type))
 
