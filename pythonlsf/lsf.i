@@ -96,16 +96,6 @@ void char_p_p_free(PyObject* ptr, int size){
 %array_class(struct queueInfoEnt, queueInfoEntArray);
 %array_class(struct hostInfoEnt, hostInfoEntArray);
 
-%typemap(out) char ** {
-  int len,i;
-  len = 0;
-  while ($1[len]) len++;
-  $result = PyList_New(len);
-  for (i = 0; i < len; i++) {
-    PyList_SetItem($result,i,PyString_FromString($1[i]));
-  }
-}
-
 // handle int arrays
 %typemap(in) int [ANY] (int temp[$1_dim0]) {
   int i;
