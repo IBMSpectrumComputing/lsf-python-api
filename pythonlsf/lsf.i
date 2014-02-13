@@ -23,37 +23,78 @@ int fclose(FILE *f);
 %pointer_functions(int, intp)
 %pointer_functions(float, floatp)
 
-%array_class(struct queueInfoEnt, queueInfoEntArray);
-%array_class(struct hostInfoEnt, hostInfoEntArray);
-
-// howto handle char **
-%typemap(in) char ** {
-  if ($input == Py_None) {
-    $1 = NULL;
-  } else if (PyList_Check($input)) {
-    int size = PyList_Size($input);
+//  helper function for char **
+%inline %{
+PyObject * char_p_p_from_pylist(PyObject* list){
+  PyObject * obj = 0;
+  char ** ptr = 0;
+  if (list == Py_None) {
+    return NULL;
+  } else if (PyList_Check(list)) {
+    int size = PyList_Size(list);
     int i = 0;
-    $1 = (char **) malloc((size+1)*sizeof(char *));
+    ptr = (char **) malloc((size+1)*sizeof(char *));
     for (i = 0; i < size; i++) {
-      PyObject *o = PyList_GetItem($input,i);
-      if (PyString_Check(o))
-        $1[i] = PyString_AsString(PyList_GetItem($input,i));
-      else {
+      PyObject *o = PyList_GetItem(list,i);
+      if (PyString_Check(o)){
+        char* str = PyString_AsString(PyList_GetItem(list,i));
+        char* newstr = malloc(strlen(str) + 1);
+        strcpy(newstr, str);
+        ptr[i] = newstr;
+      }else {
         PyErr_SetString(PyExc_TypeError,"list must contain strings");
-        free($1);
+        int j = 0;
+        for(j = 0; j < i-1; j++)
+            free(ptr[j]);
+        free(ptr);
         return NULL;
       }
+      obj = SWIG_NewPointerObj(SWIG_as_voidptr(ptr), SWIGTYPE_p_p_char, 0);
     }
-    $1[i] = 0;
+    return obj;
   } else {
     PyErr_SetString(PyExc_TypeError,"not a list");
-    return NULL;
+    return obj;
   }
 }
-
-%typemap(freearg) char ** {
-  free((char *) $1);
+PyObject * char_p_p_to_pylist(PyObject* ptr, int size){
+    void* cptr = 0;
+    char** strptr = 0;
+    int res = 0;
+    PyObject * list = 0;
+    int i = 0;
+    res = SWIG_ConvertPtr(ptr, &cptr,SWIGTYPE_p_p_char, 0 |  0 );
+    if (!SWIG_IsOK(res)) {
+      PyErr_SetString(PyExc_TypeError,"not a SWIGTYPE_p_p_char");
+      return NULL;
+    }
+    strptr = (char**)cptr;
+    list = PyList_New(size);
+    for (i = 0; i < size; i++) {
+        PyList_SetItem(list,i,PyString_FromString(strptr[i]));
+    }
+    return list;
 }
+void char_p_p_free(PyObject* ptr, int size){
+    void* cptr = 0;
+    char** strptr = 0;
+    int res = 0;
+    int i = 0;
+    res = SWIG_ConvertPtr(ptr, &cptr,SWIGTYPE_p_p_char, 0 |  0 );
+    if (!SWIG_IsOK(res)) {
+      PyErr_SetString(PyExc_TypeError,"not a SWIGTYPE_p_p_char"); 
+      return ;
+    }
+    strptr = (char**)cptr;
+    for (i = 0; i < size; i++) {
+        free(strptr[i]);
+    }
+    free(strptr);
+}
+%}
+
+%array_class(struct queueInfoEnt, queueInfoEntArray);
+%array_class(struct hostInfoEnt, hostInfoEntArray);
 
 %typemap(out) char ** {
   int len,i;
