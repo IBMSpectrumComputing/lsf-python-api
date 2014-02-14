@@ -26,24 +26,26 @@ int fclose(FILE *f);
 //helper function for conversion between char ** and python list
 %inline %{
 PyObject * char_p_p_from_pylist(PyObject* list){
-  PyObject * result = 0;
-  char ** ptr = 0;
   if (list == Py_None) {
     return NULL;
   } else if (PyList_Check(list)) {
+    PyObject * result = 0;
+    char ** ptr = 0;
     int size = PyList_Size(list);
     int i = 0;
     ptr = (char **) calloc(size, sizeof(char *));
+    if(ptr == NULL){
+        PyErr_SetString(PyExc_TypeError,"memory not enough");
+        return NULL;
+    }
     for(i = 0; i < size; i++) {
       PyObject *item = PyList_GetItem(list,i);
       if (PyString_Check(item)){
-        char* str = PyString_AsString(item);
-        char* newstr = strdup(str);
-        ptr[i] = newstr;
+        ptr[i] = strdup(PyString_AsString(item));
       }else {
-        PyErr_SetString(PyExc_TypeError,"list must contain strings");
         int j = 0;
-        for(j = 0; j < i-1; j++){
+        PyErr_SetString(PyExc_TypeError,"list must contain strings");
+        for(j = 0; j < i; j++){
             if(ptr[j])
                 free(ptr[j]);
         }
@@ -63,7 +65,7 @@ PyObject * char_p_p_to_pylist(PyObject* ptrobj, int size){
       int res = 0;
       PyObject * list = 0;
       int i = 0;
-      res = SWIG_ConvertPtr(ptrobj, &cptr,SWIGTYPE_p_p_char, 0 |  0 );
+      res = SWIG_ConvertPtr(ptrobj, &cptr,SWIGTYPE_p_p_char, 0);
       if (!SWIG_IsOK(res)) {
         PyErr_SetString(PyExc_TypeError,"not a SWIGTYPE_p_p_char");
         return NULL;
@@ -78,7 +80,7 @@ void char_p_p_free(PyObject* ptrobj, int size){
     void* cptr = 0;
     int res = 0;
     int i = 0;
-    res = SWIG_ConvertPtr(ptrobj, &cptr,SWIGTYPE_p_p_char, 0 |  0 );
+    res = SWIG_ConvertPtr(ptrobj, &cptr,SWIGTYPE_p_p_char, 0);
     if (!SWIG_IsOK(res)) {
     PyErr_SetString(PyExc_TypeError,"not a SWIGTYPE_p_p_char"); 
     return ;
