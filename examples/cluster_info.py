@@ -10,8 +10,12 @@ print '{0:15s} {1:20s} {2:20s} {3:5s} {4:4s}'.format('Hostname', 'Type',
                                                      'Model', 'Cores', 'Load')
 
 for info in lsf.get_host_info():
-
-    load = lsf.get_host_load("hname=" + info.hostName, lsf.R15M)
+    #Deal with the case when hostname contain "-".
+    if '-' in info.hostName:
+        load = lsf.get_host_load("hname=" + "'" + info.hostName + "'", lsf.R15M)
+    else:
+        load = lsf.get_host_load("hname=" + info.hostName, lsf.R15M)
+    
     if load >= 65535:
         load = -1
 
