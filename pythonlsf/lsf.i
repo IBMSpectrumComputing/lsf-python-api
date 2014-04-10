@@ -22,44 +22,12 @@ int fclose(FILE *f);
 
 %pointer_functions(int, intp)
 %pointer_functions(float, floatp)
+%array_functions(int, intArray)
+%array_functions(float, floatArray)
+%array_functions(char *, stringArray)
 
-//helper function for conversion between char ** and python list
+//helper function for transforming char** to python list
 %inline %{
-PyObject * char_p_p_from_pylist(PyObject* list){
-  if (list == Py_None) {
-    return NULL;
-  } else if (PyList_Check(list)) {
-    PyObject * result = 0;
-    char ** ptr = 0;
-    int size = PyList_Size(list);
-    int i = 0;
-    ptr = (char **) calloc(size, sizeof(char *));
-    if(ptr == NULL){
-        PyErr_SetString(PyExc_TypeError,"memory not enough");
-        return NULL;
-    }
-    for(i = 0; i < size; i++) {
-      PyObject *item = PyList_GetItem(list,i);
-      if (PyString_Check(item)){
-        ptr[i] = strdup(PyString_AsString(item));
-      }else {
-        int j = 0;
-        PyErr_SetString(PyExc_TypeError,"list must contain strings");
-        for(j = 0; j < i; j++){
-            if(ptr[j])
-                free(ptr[j]);
-        }
-        free(ptr);
-        return NULL;
-      }
-    }
-    result = SWIG_NewPointerObj(SWIG_as_voidptr(ptr), SWIGTYPE_p_p_char, 0);
-    return result;
-  } else {
-    PyErr_SetString(PyExc_TypeError,"not a list");
-    return NULL;
-  }
-}
 PyObject * char_p_p_to_pylist(PyObject* ptrobj, int size){
       void* cptr = 0;
       int res = 0;
@@ -75,21 +43,10 @@ PyObject * char_p_p_to_pylist(PyObject* ptrobj, int size){
           PyList_SetItem(list,i,PyString_FromString(((char**)cptr)[i]));
       }
       return list;
-  }
-void char_p_p_free(PyObject* ptrobj, int size){
-    void* cptr = 0;
-    int res = 0;
-    int i = 0;
-    res = SWIG_ConvertPtr(ptrobj, &cptr,SWIGTYPE_p_p_char, 0);
-    if (!SWIG_IsOK(res)) {
-    PyErr_SetString(PyExc_TypeError,"not a SWIGTYPE_p_p_char"); 
-    return ;
-    }
-    for (i = 0; i < size; i++) {
-      if(((char**)cptr)[i])
-          free(((char**)cptr)[i]);
-    }
-    free(cptr);
+}
+
+PyObject * string_array_to_pylist(PyObject* ptrobj, int size){
+    return char_p_p_to_pylist(ptrobj,size);
 }
 %}
 
