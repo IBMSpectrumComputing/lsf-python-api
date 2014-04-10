@@ -16,10 +16,9 @@ def display(eventrec):
     elif eventrec.type == lsf.EVENT_JOB_START:
         numHosts = eventrec.eventLog.jobStartLog.numExHosts
         execHosts = eventrec.eventLog.jobStartLog.execHosts
-        execHostList = lsf.char_p_p_to_pylist(execHosts, numHosts)
         hoststr = ""
-        for host in execHostList:
-            hoststr += host + " "
+        for i in range(0,numHosts):
+            hoststr += lsf.stringArray_getitem(execHosts, i) + ""
         print("EVENT_JOB_START execHosts<%s>" %(hoststr))
     else:
         print("event type is %d" %(eventrec.type))
