@@ -25,5 +25,14 @@ for info in lsf.get_host_info():
                                                            info.cores,
                                                            load)
 
+    resources = ""
+    index = 0;
+    while(1):
+        item = lsf.stringArray_getitem(info.resources,index)
+        if(item):
+            resources += item +" "
+            index += 1
+        else:
+           break;
     if info.nRes > 0:
-        print ' +--> Resources:', info.resources
+        print ' +--> Resources:', resources
