@@ -26,8 +26,6 @@ def query_queue(queue_name):
     print 'queue name = %s' % queueInfo.queue;
     print 'queue description = %s' % queueInfo.description; 
 
-    #job_id = lsf.lsb_submit(submitreq, submitreply)
-    #return job_id
     return 0;
 
 if __name__ == '__main__':
