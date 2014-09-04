@@ -28,6 +28,22 @@ def query_queue(queue_name):
 
     return 0;
 
+def printQueueInfo():
+    if lsf.lsb_init("test") > 0:
+        return -1;
+
+    strArr = lsf.new_stringArray(2); //array length is 2
+    lsf.stringArray_setitem(strArr, 0, "normal");
+    lsf.stringArray_setitem(strArr, 1, "short");
+
+    for info in lsf.get_queue_info_by_name(strArr, 2):
+        print info.queue;
+        print info.description;
+        print ''
+
+    return 0;
+    
 if __name__ == '__main__':
     print("LSF Clustername is :", lsf.ls_getclustername())
     print(query_queue("normal"))
+    printQueueInfo()
