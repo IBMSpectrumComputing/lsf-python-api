@@ -211,4 +211,41 @@ PyObject * get_host_load(char *resreq, int index) {
     PyObject *result = PyFloat_FromDouble(hosts[0].li[index]);
     return result;
 }
+
+PyObject * get_queue_info_by_name(char** name, int num) {
+    struct queueInfoEnt* queueinfo;
+    int    numqueues = num;
+    int    options = 0;
+
+    queueinfo = lsb_queueinfo(name, &numqueues, NULL, 0, options);
+
+    PyObject *result = PyList_New(numqueues);
+    int i;
+    for (i = 0; i < numqueues; i++) {
+        PyObject *o = SWIG_NewPointerObj(SWIG_as_voidptr(&queueinfo[i]),
+                                         SWIGTYPE_p_queueInfoEnt, 0 |  0 );
+        PyList_SetItem(result,i,o);
+    }
+
+    return result;
+}
+
+PyObject * get_hostgroup_info_by_name(char** name, int num) {
+    struct groupInfoEnt* hostgroupinfo;
+    int    numgroups = num;
+    int    options = 0;
+
+    hostgroupinfo = lsb_hostgrpinfo(name, &numgroups, options);
+
+    PyObject *result = PyList_New(numgroups);
+    int i;
+    for (i = 0; i < numgroups; i++) {
+        PyObject *o = SWIG_NewPointerObj(SWIG_as_voidptr(&hostgroupinfo[i]),
+                                         SWIGTYPE_p_groupInfoEnt, 0 |  0 );
+        PyList_SetItem(result,i,o);
+    }
+
+    return result;
+}
+
 %}
