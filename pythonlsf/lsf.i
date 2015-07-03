@@ -26,6 +26,7 @@ int fclose(FILE *f);
 %array_functions(int, intArray)
 %array_functions(float, floatArray)
 %array_functions(char *, stringArray)
+%array_functions(struct dependJobs, dependJobsArray)
 
 //helper function for transforming char** to python list
 %inline %{
