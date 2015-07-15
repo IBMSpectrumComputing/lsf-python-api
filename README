@@ -23,8 +23,9 @@ CONTENTS
 Introduction
 ==========================
 
-This library allows you to call the LSF APIs from Python. The wrapper is created
-by using SWIG. 
+This library allows you to call the LSF APIs (https://www.ibm.com/developerworks/community/wikis/home?lang=en#!/wiki/New%20IBM%20Platform%20LSF%20Wiki/page/Integrations%2C%20APIs%2C%20and%20samples) from Python. The wrapper is created with SWIG. 
+
+You are encouraged to contribute your own Python wrappers to the open source LSF APIs for Python, and you may find some examples in  IBM Platform LSF Wiki (https://www.ibm.com/developerworks/community/wikis/home?lang=en#!/wiki/New%20IBM%20Platform%20LSF%20Wiki/page/Using%20the%20Python%20wrapper%20for%20LSF%20API).
 
 IBM Platform Computing will provide formal support for this software  
 to entitled clients via the normal IBM support channels.
