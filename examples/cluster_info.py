@@ -27,12 +27,12 @@ for info in lsf.get_host_info():
 
     resources = ""
     index = 0;
-    while(1):
-        item = lsf.stringArray_getitem(info.resources,index)
-        if(item):
-            resources += item +" "
-            index += 1
-        else:
-           break;
     if info.nRes > 0:
+        while(1):
+            item = lsf.stringArray_getitem(info.resources,index)
+            if(item):
+                resources += item +" "
+                index += 1
+            else:
+               break;
         print ' +--> Resources:', resources
