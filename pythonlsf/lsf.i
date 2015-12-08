@@ -250,4 +250,26 @@ PyObject * get_hostgroup_info_by_name(char** name, int num) {
     return result;
 }
 
+PyObject * get_all_jobs() {
+    struct jobInfoEnt *job;
+    PyObject *result;
+    int i, jobs;
+
+    jobs = lsb_openjobinfo(0, NULL, ALL_USERS, NULL, NULL, ALL_JOB);
+    result = PyList_New(jobs < 0 ? 0 : jobs);
+    if (jobs < 0) {
+        lsb_closejobinfo();
+        return result;
+    }
+
+    for (i=0; jobs >= 0; i++, jobs--) {
+        job = lsb_readjobinfo(&jobs);
+        PyObject *o = SWIG_NewPointerObj(SWIG_as_voidptr(&job),
+                                         SWIGTYPE_p_jobInfoEnt, 0);
+        PyList_SetItem(result, i, o);
+    }
+
+    return result;
+}
+
 %}
