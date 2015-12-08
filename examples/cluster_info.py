@@ -15,7 +15,7 @@ for info in lsf.get_host_info():
         load = lsf.get_host_load("hname=" + "'" + info.hostName + "'", lsf.R15M)
     else:
         load = lsf.get_host_load("hname=" + info.hostName, lsf.R15M)
-    
+
     if load >= 65535:
         load = -1
 
@@ -26,7 +26,7 @@ for info in lsf.get_host_info():
                                                            load)
 
     resources = ""
-    index = 0;
+    index = 0
     if info.nRes > 0:
         while(1):
             item = lsf.stringArray_getitem(info.resources,index)
@@ -34,5 +34,5 @@ for info in lsf.get_host_info():
                 resources += item +" "
                 index += 1
             else:
-               break;
+               break
         print ' +--> Resources:', resources
