@@ -1,8 +1,8 @@
-Readme file for: LSF
-Product/Component Release: 9.1.2
-Version: 1.0.1
+Readme file for: IBM Spectrum LSF
+Product/Component Release: 10.1
+Version: 1.0.2
 Publication date: 16 October 2013
-Last modified: 2 December 2013
+Last modified: 5 December 2016
 
 
 Python wrapper for LSF APIs
@@ -27,7 +27,7 @@ This library allows you to call the LSF APIs (https://www.ibm.com/developerworks
 
 You are encouraged to contribute your own Python wrappers to the open source LSF APIs for Python, and you may find some examples in  IBM Platform LSF Wiki (https://www.ibm.com/developerworks/community/wikis/home?lang=en#!/wiki/New%20IBM%20Platform%20LSF%20Wiki/page/Using%20the%20Python%20wrapper%20for%20LSF%20API).
 
-IBM Platform Computing will provide formal support for this software  
+IBM provides formal support for this software  
 to entitled clients via the normal IBM support channels.
 
 This software is under the Eclipse Public License.
@@ -60,6 +60,9 @@ Release 1.0.1
   * get_host_info()     - Returns a list of hostInfo objects.
   * get_host_load()     - Returns the current values for the resources of a host.
 
+Release 1.0.2
+
+-  Fix a compliation error
 
 ==========================
 Community Contribution
@@ -75,7 +78,7 @@ Developer's Certificate of Origin (DCO) process:
     originator or has rights to publish. The template of the DCO is included in
     this package).
  
- 3. LSF Development reviews contribution to check for:
+ 3. IBM Spectrum LSF development reviews contribution to check for:
     i)  Applicability and relevancy of functional content 
     ii) Any obvious issues
 
@@ -86,7 +89,7 @@ Developer's Certificate of Origin (DCO) process:
 Copyright
 =========================
 
-(C) Copyright IBM Corporation 2013
+(C) Copyright IBM Corporation 2016
 
 U.S. Government Users Restricted Rights - Use, duplication or disclosure 
 restricted by GSA ADP Schedule Contract with IBM Corp.
