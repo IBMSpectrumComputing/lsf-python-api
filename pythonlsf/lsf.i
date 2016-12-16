@@ -173,6 +173,64 @@ PyObject * get_host_info() {
     return result;
 }    
 
+/* taken form stdio.h */
+#define SEEK_SET    0   /* Seek from beginning of file.  */
+#define SEEK_CUR    1   /* Seek from current position.  */
+#define SEEK_END    2   /* Seek from end of file.  */
+PyObject * lsb_fseek(PyObject *obj0, PyObject *obj1, PyObject *obj2){
+  FILE *arg1 = (FILE *) 0 ;
+  void *argp1 = 0 ;
+  long val2 = 0 ;
+  int val3 = 0 ;
+  int res1 = 0 ;
+  int res2 = 0 ;
+  int res3 = 0 ;
+  PyObject *resultobj = 0;
+  int result;
+
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_FILE, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "fseek" "', argument " "1"" of type '" "FILE *""'");
+  }
+  arg1 = (FILE *)(argp1);
+
+  res2 = SWIG_AsVal_long(obj1, &val2 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "fseek" "', argument " "2"" of type '" "long *""'");
+  }
+
+  res3 = SWIG_AsVal_int(obj2, &val3 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "fseek" "', argument " "3"" of type '" "int *""'");
+  }
+
+  result = (int)fseek(arg1,val2,val3);
+  resultobj = SWIG_From_int((int)(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+PyObject * lsb_ftell(PyObject *obj0){
+  FILE *arg1 = (FILE *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *resultobj = 0;
+  long result;
+
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_FILE, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "fseek" "', argument " "1"" of type '" "FILE *""'");
+  }
+  arg1 = (FILE *)(argp1);
+
+  result = (long)ftell(arg1);
+  resultobj = SWIG_From_long((long)(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
 PyObject * get_load_of_hosts() {
     struct hostLoad *hostload; 
     char   *resreq; 
