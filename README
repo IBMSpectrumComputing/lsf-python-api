@@ -1,8 +1,8 @@
 Readme file for: IBM Spectrum LSF
 Product/Component Release: 10.1
-Version: 1.0.2
+Version: 1.0.3
 Publication date: 16 October 2013
-Last modified: 5 December 2016
+Last modified: 16 December 2016
 
 
 Python wrapper for LSF APIs
@@ -64,6 +64,12 @@ Release 1.0.2
 
 -  Fix a compliation error
 
+Release 1.0.3
+
+-  Added 2 extra routines below :
+    * lsb_fseek()
+    * lsb_ftell()
+    
 ==========================
 Community Contribution
 ==========================
