@@ -1,6 +1,9 @@
-#!/usr/local/bin/python2.7
+#! /usr/bin/env python
 
 from pythonlsf import lsf
+
+if lsf.lsb_init("test") > 0:
+    exit(1)
 
 print '\n Hosts in cluster: ', lsf.get_host_names()
 
