@@ -1,8 +1,8 @@
 Readme file for: IBM Spectrum LSF
 Product/Component Release: 10.1
-Version: 1.0.3
+Version: 1.0.4
 Publication date: 16 October 2013
-Last modified: 16 December 2016
+Last modified: 6 January 2017
 
 
 Python wrapper for LSF APIs
@@ -32,6 +32,7 @@ to entitled clients via the normal IBM support channels.
 
 This software is under the Eclipse Public License.
 
+Please note you must use lsf.lsb_init before any other LSBLIB library routine in your application.
 
 ==========================
 Installation
@@ -69,6 +70,11 @@ Release 1.0.3
 -  Added 2 extra routines below :
     * lsb_fseek()
     * lsb_ftell()
+
+Release 1.0.4
+
+- Fixed a bug for using lsf.lsb_readstream()
+- Added a new example, readstream.py
     
 ==========================
 Community Contribution
