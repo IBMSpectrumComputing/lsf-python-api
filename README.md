@@ -72,7 +72,7 @@ and type:
     
 ## Community Contribution Requirements
 
-Community contributions to this branch must follow the IBM Developer's Certificate of Origin (DCO) process and only through Pull Requests:
+Community contributions to this branch must follow the [IBM Developer's Certificate of Origin (DCO)](https://github.com/IBMSpectrumComputing/platform-python-lsf-api/blob/master/IBMDCO.md) process and only through GitHub Pull Requests:
 
  1. Contributor proposes new code to community.
 
