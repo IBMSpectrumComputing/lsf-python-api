@@ -2,7 +2,7 @@
 
 To improve tracking of contributions to this project we will use a process modeled on the modified DCO 1.1 and use a "sign-off" procedure on patches that are being emailed around or contributed in any other way.
 
-The sign-off is a simple line within the pull requests comments section, which certifies that you wrote it or otherwise have the right to pass it on as an open-source patch.  The rules are pretty simple: if you can certify the below:
+The sign-off is a simple line within the pull requests comments section, which certifies that you wrote it or otherwise have the right to pass it on as an open-source patch.  The rules are pretty simple, if you can certify the below:
 
 By making a contribution to this project, I certify that:
 
