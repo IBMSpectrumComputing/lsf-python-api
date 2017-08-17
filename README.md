@@ -2,7 +2,7 @@
 
 These python wrappers allow customers to submit and control jobs and obtain status of queues, hosts and other LSF attributes from Python directly.  They work with various versions of LSF and are maintained by LSF developement, though we take contributions from the Open Source community.
 
-If you plan or would like to contribute to the library, you must follow the DCO process in the attached DCO Readme file in the root of this repository.  It essentially requires you to provide a Sign Off line in the notes of your pull request stating that the work is clear of infinging work by others.  Again, for more details, please see the DCO Readme file.
+If you plan or would like to contribute to the library, you must follow the DCO process in the attached [DCO Readme file](https://github.com/IBMSpectrumComputing/platform-python-lsf-api/blob/master/IBMDCO.md) in the root of this repository.  It essentially requires you to provide a Sign Off line in the notes of your pull request stating that the work is clear of infinging work by others.  Again, for more details, please see the DCO Readme file.
 
 ## Release Information
 
@@ -45,7 +45,7 @@ and type:
 
 ## Release Notes
 
-* Release 1.0.1
+### Release 1.0.1
 
 - This is the first release from IBM Platform Computing.
 - Tested with LSF 9.1.2 on Linux 2.6.
@@ -55,24 +55,24 @@ and type:
   * get_host_info()     - Returns a list of hostInfo objects.
   * get_host_load()     - Returns the current values for the resources of a host.
 
-* Release 1.0.2
+### Release 1.0.2
 
 -  Fix a compliation error
 
-* Release 1.0.3
+### Release 1.0.3
 
 -  Added 2 extra routines below :
     * lsb_fseek()
     * lsb_ftell()
 
-* Release 1.0.4
+### Release 1.0.4
 
 - Fixed a bug for using lsf.lsb_readstream()
 - Added a new example, readstream.py
     
 ## Community Contribution Requirements
 
-Community contributions to this branch must follow the [IBM Developer's Certificate of Origin (DCO)](https://github.com/IBMSpectrumComputing/platform-python-lsf-api/blob/master/IBMDCO.md) process and only through GitHub Pull Requests:
+Community contributions to this repository must follow the [IBM Developer's Certificate of Origin (DCO)](https://github.com/IBMSpectrumComputing/platform-python-lsf-api/blob/master/IBMDCO.md) process and only through GitHub Pull Requests:
 
  1. Contributor proposes new code to community.
 
