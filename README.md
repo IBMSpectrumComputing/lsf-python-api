@@ -6,9 +6,11 @@
 * Publication date: 16 October 2013
 * Last modified: 6 January 2017
 
-## Python wrapper for LSF APIs
+These python wrappers allow customers to submit and control jobs and obtain status of queues, hosts and other LSF attributes from Python directly.  They work with various versions of LSF and are maintained by LSF developement, though we take contributions from the Open Source community.
 
-# Contents
+If you plan or would like to contribute to the library, you must follow the DCO process in the attached DCO Readme file in the root of this repository.  It essentially requires you to provide a Sign Off line in the notes of your pull request stating that the work is clear of infinging work by others.  Again, for more details, please see the DCO Readme file.
+
+## Contents
 
 * Introduction
 * Installation
@@ -18,14 +20,13 @@
  
 ## Introduction
 
-This library allows you to call the LSF APIs (https://www.ibm.com/developerworks/community/wikis/home?lang=en#!/wiki/New%20IBM%20Platform%20LSF%20Wiki/page/Integrations%2C%20APIs%2C%20and%20samples) from Python. The wrapper is created with SWIG. 
+This library allows you to call the LSF APIs directly through Python (https://www.ibm.com/developerworks/community/wikis/home?lang=en#!/wiki/New%20IBM%20Platform%20LSF%20Wiki/page/Integrations%2C%20APIs%2C%20and%20samples). The wrapper is created using Pythons SWIG interface and links directly to LSF's shared libraries. 
 
-You are encouraged to contribute your own Python wrappers to the open source LSF APIs for Python, and you may find some examples in  IBM Platform LSF Wiki (https://www.ibm.com/developerworks/community/wikis/home?lang=en#!/wiki/New%20IBM%20Platform%20LSF%20Wiki/page/Using%20the%20Python%20wrapper%20for%20LSF%20API).
+You are encouraged to contribute your own Python wrappers to the Open Source LSF APIs for Python, and you may find some examples in  IBM Platform LSF Wiki (https://www.ibm.com/developerworks/community/wikis/home?lang=en#!/wiki/New%20IBM%20Platform%20LSF%20Wiki/page/Using%20the%20Python%20wrapper%20for%20LSF%20API).
 
-IBM provides formal support for this software  
-to entitled clients via the normal IBM support channels.
+IBM provides formal support for this software to entitled clients via the normal IBM support channels.
 
-This software is under the Eclipse Public License.
+This software is Licensed under the Eclipse Public License.
 
 Please note you must use lsf.lsb_init before any other LSBLIB library routine in your application.
 
@@ -66,9 +67,9 @@ and type:
 - Fixed a bug for using lsf.lsb_readstream()
 - Added a new example, readstream.py
     
-## Community Contribution Guidelines
+## Community Contribution Requirements
 
-Community contributions to this branch must follow the IBM Developer's Certificate of Origin (DCO) process:
+Community contributions to this branch must follow the IBM Developer's Certificate of Origin (DCO) process and only through Pull Requests:
 
  1. Contributor proposes new code to community.
 
@@ -81,8 +82,7 @@ Community contributions to this branch must follow the IBM Developer's Certifica
     i)  Applicability and relevancy of functional content 
     ii) Any obvious issues
 
- 4. If accepted, posts contribution. If rejected, work goes back to contributor and is not posted.
-
+ 4. If accepted, posts contribution. If rejected, work goes back to contributor and is not merged.
 
 ## Copyright
 
