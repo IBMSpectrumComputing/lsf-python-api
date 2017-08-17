@@ -1,14 +1,16 @@
 # platform-python-lsf-api
 
-* Readme file for: IBM Spectrum LSF
-* Product/Component Release: 10.1
-* Version: 1.0.4
-* Publication date: 16 October 2013
-* Last modified: 6 January 2017
-
 These python wrappers allow customers to submit and control jobs and obtain status of queues, hosts and other LSF attributes from Python directly.  They work with various versions of LSF and are maintained by LSF developement, though we take contributions from the Open Source community.
 
 If you plan or would like to contribute to the library, you must follow the DCO process in the attached DCO Readme file in the root of this repository.  It essentially requires you to provide a Sign Off line in the notes of your pull request stating that the work is clear of infinging work by others.  Again, for more details, please see the DCO Readme file.
+
+## Release Information
+
+* IBM Spectrum LSF Python Wrappers
+* Supporting LSF Release: 10.1
+* Wrapper Version: 1.0.4
+* Publication date: 16 October 2013
+* Last modified: 6 January 2017
 
 ## Contents
 
