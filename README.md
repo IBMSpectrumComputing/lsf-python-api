@@ -45,6 +45,21 @@ and type:
 
 ## Release Notes
 
+### Release 1.0.4
+
+- Fixed a bug for using lsf.lsb_readstream()
+- Added a new example, readstream.py
+
+### Release 1.0.3
+
+-  Added 2 extra routines below :
+    * lsb_fseek()
+    * lsb_ftell()
+
+### Release 1.0.2
+
+-  Fix a compliation error
+
 ### Release 1.0.1
 
 - This is the first release from IBM Platform Computing.
@@ -55,21 +70,6 @@ and type:
   * get_host_info()     - Returns a list of hostInfo objects.
   * get_host_load()     - Returns the current values for the resources of a host.
 
-### Release 1.0.2
-
--  Fix a compliation error
-
-### Release 1.0.3
-
--  Added 2 extra routines below :
-    * lsb_fseek()
-    * lsb_ftell()
-
-### Release 1.0.4
-
-- Fixed a bug for using lsf.lsb_readstream()
-- Added a new example, readstream.py
-    
 ## Community Contribution Requirements
 
 Community contributions to this repository must follow the [IBM Developer's Certificate of Origin (DCO)](https://github.com/IBMSpectrumComputing/platform-python-lsf-api/blob/master/IBMDCO.md) process and only through GitHub Pull Requests:
