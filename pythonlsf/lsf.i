@@ -54,6 +54,7 @@ PyObject * string_array_to_pylist(PyObject* ptrobj, int size){
 
 %array_class(struct queueInfoEnt, queueInfoEntArray);
 %array_class(struct hostInfoEnt, hostInfoEntArray);
+%array_class(struct hostLoad, hostLoadArray);
 
 // handle int arrays
 %typemap(in) int [ANY] (int temp[$1_dim0]) {
