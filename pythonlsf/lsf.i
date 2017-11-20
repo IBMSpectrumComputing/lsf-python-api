@@ -309,4 +309,17 @@ PyObject * get_hostgroup_info_by_name(char** name, int num) {
     return result;
 }
 
+PyObject * get_conf_value(char *name, char *path) {
+    struct config_param param[2];
+    param[0].paramName = name;
+    param[0].paramValue = NULL;
+    param[1].paramName = NULL;
+    param[1].paramValue = NULL;
+    if (ls_readconfenv(&param[0],path) == 0) {
+        return Py_BuildValue("s", param[0].paramValue);
+    } else {
+        Py_RETURN_NONE;
+    }
+}
+
 %}
