@@ -22,11 +22,13 @@ int fclose(FILE *f);
 
 %pointer_functions(int, intp)
 %pointer_functions(float, floatp)
+%pointer_functions(long, longp)
 %pointer_functions(LS_LONG_INT, LS_LONG_INT_POINTER)
 %array_functions(int, intArray)
 %array_functions(float, floatArray)
 %array_functions(char *, stringArray)
 %array_functions(struct dependJobs, dependJobsArray)
+%array_functions(long, longArray)
 
 //helper function for transforming char** to python list
 %inline %{
