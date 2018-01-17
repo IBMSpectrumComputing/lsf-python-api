@@ -88,11 +88,15 @@ PyObject * string_array_to_pylist(PyObject* ptrobj, int size){
 }
 
 %typemap(freearg) time_t {
-    free((time_t *) $1);
+    if ($1) free((time_t *) $1);
 }
 
 %typemap(out) time_t {
     $result = PyLong_FromLong((long)$1);
+}
+
+%typemap(arginit) time_t {
+   $1 = 0;
 }
 
 /* 
@@ -124,6 +128,8 @@ PyObject * string_array_to_pylist(PyObject* ptrobj, int size){
 %ignore ls_verrlog;
 %ignore lsb_globalpolicy;
 %ignore lsb_jobidindex2str;
+%ignore LOG_VERSION;
+%ignore ls_errmsg;
 
 // Following are ignored from lsbatch.h
 
@@ -238,7 +244,6 @@ PyObject * get_load_of_hosts() {
     struct hostLoad *hostload; 
     char   *resreq; 
     int    numhosts = 0; 
-    int    options = 0; 
     
     resreq = "";
 
