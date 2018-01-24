@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 from pythonlsf import lsf
+import sys
 
 def display(eventrec):
     """
@@ -18,6 +19,16 @@ def display(eventrec):
         for i in range(0,numHosts):
             hoststr += lsf.stringArray_getitem(execHosts, i) + ""
         print("EVENT_JOB_START execHosts<%s>" %(hoststr))
+    elif eventrec.type == lsf.EVENT_JOB_FORCE:
+        username = eventrec.eventLog.jobForceRequestLog.userName
+        jobid = eventrec.eventLog.jobForceRequestLog.jobId
+        numhosts = eventrec.eventLog.jobForceRequestLog.numExecHosts
+        exechosts = eventrec.eventLog.jobForceRequestLog.execHosts
+        hoststr = ""
+        for i in range(0,numhosts):
+            hoststr += lsf.stringArray_getitem(exechosts, i) + ""
+        print("EVENT_JOB_FORCE jobid<%d>, execHost<%s>, username<%s>" %(jobid, hoststr, username))
+
     else:
         print("event type is %d" %(eventrec.type))
 
@@ -46,7 +57,26 @@ def read_eventrec(path):
         else:
             flag = 0
 
+def read_streamline(path):
+    """
+    Use lsb_readstreamline() to parse the file
+    """
+
+    file = open(path)
+ 
+    while 1:
+        lines = file.readlines(100000)
+        if not lines:
+            break
+        for line in lines:
+            log = lsf.lsb_readstreamline(line)
+            if log:
+                display(log)
+            else:
+                break
 
 if __name__ == '__main__':
     print("LSF Clustername is :", lsf.ls_getclustername())
-    read_eventrec("/home/youname/lsf_top/work/yourcluster/logdir/stream/lsb.stream")
+#    read_eventrec("/home/youname/lsf_top/work/yourcluster/logdir/stream/lsb.stream")
+#    read_streamline("/home/youname/lsf_top/work/yourcluster/logdir/stream/lsb.stream")
+    read_streamline(sys.argv[1])
