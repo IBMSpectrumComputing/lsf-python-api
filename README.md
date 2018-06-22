@@ -43,6 +43,12 @@ and type:
 
 `$ sudo python setup.py install`
 
+To instead build an RPM:
+
+`$ python setup.py bdist_rpm`
+
+Resulting RPMs will be placed in the dist directory
+
 ## Release Notes
 
 ### Release 1.0.4

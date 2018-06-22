@@ -7,13 +7,30 @@
 # modify it under the terms of the Eclipse Public License.
 # 
 import os
+import time
 from distutils.core import setup, Extension
-setup(name='platform-python-lsf-api',
-      version='1.0.1',
-      description='Python binding for Platform LSF APIs',
+from distutils.command.bdist_rpm import bdist_rpm
+
+class bdist_rpm_custom(bdist_rpm):
+      """bdist_rpm that sets custom RPM options"""
+      def finalize_package_data (self):
+            if self.release is None:
+                  self.release = time.strftime("%Y%m%d")+"%{?dist}"
+            if self.vendor is None:
+                  self.vendor = 'IBM Corporation'
+            if self.packager is None:
+                  self.packager = 'IBM Corporation'
+            # Disable autoreq in case LSF is installed from a tarball
+            self.no_autoreq = 1
+            bdist_rpm.finalize_package_data(self)
+
+setup(name='spectrum-lsf-python-api',
+      version='1.0.4',
+      description='Python binding for Spectrum LSF APIs',
+      long_description='Python binding for Spectrum LSF APIs',
       license='LGPL',
       keywords='LSF,Grid,Cluster,HPC',
-      url='http://www.platform.com',
+      url='https://github.com/IBMSpectrumComputing/lsf-python-api',
       ext_package='pythonlsf',
       ext_modules=[Extension('_lsf', ['pythonlsf/lsf.i'],
                                include_dirs=['/usr/include/python2.4'],
@@ -24,6 +41,7 @@ setup(name='platform-python-lsf-api',
                                libraries=['c', 'nsl', 'lsf', 'bat', 'rt',
                                             'fairshareadjust', 'lsbstream'])],
       py_modules=['pythonlsf.lsf'],
+      cmdclass = { 'bdist_rpm': bdist_rpm_custom },
       classifiers=["Development Status :: 2 - Pre-Alpha",
                      "License :: OSI Approved :: Eclipse Public License",
                      "Operating System :: OS Independent",
