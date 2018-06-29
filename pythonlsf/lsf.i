@@ -134,6 +134,9 @@ PyObject * string_array_to_pylist(PyObject* ptrobj, int size){
 // Following are ignored from lsbatch.h
 
 %ignore lsb_readstatusline;
+%ignore lsb_rc_hostinfo;
+%ignore lsb_rc_free_hostinfo;
+%ignore getHostGpuNvlinkInfoFromStr;
 
 // Now include the rest...
 
