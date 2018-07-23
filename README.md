@@ -36,7 +36,7 @@ Please note you must use lsf.lsb_init before any other LSBLIB library routine in
 
 Before compiling the library, set the LSF environment variables:
 
-`$ source profile.lsf
+`$ source profile.lsf`
 
 To compile and install the library, go to the main source directory
 and type:
