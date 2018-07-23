@@ -137,6 +137,8 @@ PyObject * string_array_to_pylist(PyObject* ptrobj, int size){
 %ignore lsb_rc_hostinfo;
 %ignore lsb_rc_free_hostinfo;
 %ignore getHostGpuNvlinkInfoFromStr;
+%ignore fairshare_adjustment;
+%ignore FairAdjustPairArrayName;
 
 // Now include the rest...
 

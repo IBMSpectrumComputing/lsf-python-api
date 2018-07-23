@@ -32,11 +32,11 @@ def printQueueInfo():
     if lsf.lsb_init("test") > 0:
         return -1;
 
-    strArr = lsf.new_stringArray(2); //array length is 2
+    strArr = lsf.new_stringArray(1); #array length is 2
     lsf.stringArray_setitem(strArr, 0, "normal");
-    lsf.stringArray_setitem(strArr, 1, "short");
+#    lsf.stringArray_setitem(strArr, 1, "short");
 
-    for info in lsf.get_queue_info_by_name(strArr, 2):
+    for info in lsf.get_queue_info_by_name(strArr, 1):
         print info.queue;
         print info.description;
         print ''

@@ -1,3 +1,7 @@
+#! /usr/bin/env python
+
+from pythonlsf import lsf
+
 def queryHostGroupInfo():
     """
     "query host group info"

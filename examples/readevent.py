@@ -1,6 +1,7 @@
-#!/usr/local/bin/python2.7
+#! /usr/bin/env python
 
 from pythonlsf import lsf
+import sys
 
 
 def display(eventrec):
@@ -44,5 +45,10 @@ def read_eventrec(path):
 
 
 if __name__ == '__main__':
+    if len(sys.argv) == 1:
+        print("Usage: %s full_path_lsb.events_file" % (sys.argv[0]))
+        sys.exit(0)
+
     print("LSF Clustername is :", lsf.ls_getclustername())
-    read_eventrec("/opt/lsf8.0.1/work/cluster1/logdir/lsb.events")
+    #read_eventrec("/opt/lsf8.0.1/work/cluster1/logdir/lsb.events")
+    read_eventrec(sys.argv[1])

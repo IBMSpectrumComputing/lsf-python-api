@@ -36,19 +36,23 @@ def read_eventrec(path):
     """
     read lsb.streams
     """
+
+    if lsf.lsb_init("test") > 0:
+        exit(1)
+
     s = lsf.lsbStream()
     s.streamFile = path;
     s.maxStreamSize = 1024*1024*1024
     s.maxStreamFileNum = 10;
 
-    lsf.lsb_openstream(s)
+    cc = lsf.lsb_openstream(s)
+    if cc < 0 :
+        print("Cannot open the file %s. Ensure you are the file owner." % (path))
+        exit(1);
 
     lineNum = lsf.new_intp()
     lsf.intp_assign(lineNum, 0)
     flag = 1
-
-    if lsf.lsb_init("test") > 0:
-        exit(1)
 
     while flag > 0:
         log = lsf.lsb_readstream(lineNum)
@@ -61,6 +65,9 @@ def read_streamline(path):
     """
     Use lsb_readstreamline() to parse the file
     """
+
+    if lsf.lsb_init("test") > 0:
+        exit(1)
 
     file = open(path)
  
@@ -76,7 +83,12 @@ def read_streamline(path):
                 break
 
 if __name__ == '__main__':
+    if len(sys.argv) == 1:
+        print("Usage: %s full_path_lsb.stream_file" % (sys.argv[0]))
+        sys.exit(0)
+
     print("LSF Clustername is :", lsf.ls_getclustername())
 #    read_eventrec("/home/youname/lsf_top/work/yourcluster/logdir/stream/lsb.stream")
 #    read_streamline("/home/youname/lsf_top/work/yourcluster/logdir/stream/lsb.stream")
-    read_streamline(sys.argv[1])
+    #read_streamline(sys.argv[1])
+    read_eventrec(sys.argv[1])

@@ -8,9 +8,9 @@ If you plan or would like to contribute to the library, you must follow the DCO 
 
 * IBM Spectrum LSF Python Wrappers
 * Supporting LSF Release: 10.1
-* Wrapper Version: 1.0.4
+* Wrapper Version: 1.0.5
 * Publication date: 16 October 2013
-* Last modified: 6 January 2017
+* Last modified: 20 July 2018
 
 ## Contents
 
@@ -34,7 +34,8 @@ Please note you must use lsf.lsb_init before any other LSBLIB library routine in
 
 ## Installation
 
-Before compiling the library, set the LSF environment variables.
+Before compiling the library, set the LSF environment variables:
+`$ source profile.lsf
 
 To compile and install the library, go to the main source directory
 and type:
@@ -50,6 +51,15 @@ To instead build an RPM:
 Resulting RPMs will be placed in the dist directory
 
 ## Release Notes
+
+### Release 1.0.5
+- Resolve compability issue
+    * For Linux ppc64le, IBM XL C/C++ compiler should be installed firstly.
+    * For LSF 10.1.0.2 or earlier version, the compatibility is not guaranteed
+      if you update LSF at a later time. To avoid this compatibility issue, 
+      update LSF to version 10.1.0.3, or later, then rebuild and reinstall the 
+      LSF Python API package.
+    * The code is tested on Linux x86_64 & ppc64le platform with Python2.7
 
 ### Release 1.0.4
 
