@@ -52,7 +52,7 @@ Warning: The compatibility of the LSF Python API package is not guaranteed
 ''' % (os.environ['LSF_LIBDIR'])
 
 setup(name='spectrum-lsf-python-api',
-      version='1.0.4',
+      version='1.0.5',
       description='Python binding for Spectrum LSF APIs',
       long_description='Python binding for Spectrum LSF APIs',
       license='LGPL',
