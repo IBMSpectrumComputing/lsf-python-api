@@ -60,6 +60,9 @@ Resulting RPMs will be placed in the dist directory
       update LSF to version 10.1.0.3, or later, then rebuild and reinstall the 
       LSF Python API package.
     * The code is tested on Linux x86_64 & ppc64le platform with Python2.7
+    * For creating RPM package on Linux ppc64le platform, executing the following 
+      instruction not to create debug information package due to compatibility issue:
+          `$ echo '%debug_package %{nil}' >> ~/.rpmmacros`
 
 ### Release 1.0.4
 
