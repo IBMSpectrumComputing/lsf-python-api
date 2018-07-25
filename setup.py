@@ -15,7 +15,7 @@ class bdist_rpm_custom(bdist_rpm):
       """bdist_rpm that sets custom RPM options"""
       def finalize_package_data (self):
             if self.release is None:
-                  self.release = time.strftime("%Y%m%d")+"%{?dist}"
+                  self.release = time.strftime("%Y%m%d")+"%{?dist}"+"."+lsfversion
             if self.vendor is None:
                   self.vendor = 'IBM Corporation'
             if self.packager is None:
@@ -50,6 +50,10 @@ Warning: The compatibility of the LSF Python API package is not guaranteed
          To avoid this compatibility issue, update LSF to version 10.1.0.3, 
          or later, then rebuild and reinstall the LSF Python API package. 
 ''' % (os.environ['LSF_LIBDIR'])
+
+if sys.argv[1] == 'bdist_rpm' :
+    lsidout = os.popen('lsid | head -1').readlines()
+    lsfversion = "lsf"+lsidout[0].split()[4].split(',')[0]
 
 setup(name='spectrum-lsf-python-api',
       version='1.0.5',
