@@ -15,7 +15,7 @@ class bdist_rpm_custom(bdist_rpm):
       """bdist_rpm that sets custom RPM options"""
       def finalize_package_data (self):
             if self.release is None:
-                  self.release = time.strftime("%Y%m%d")+"%{?dist}"+"."+lsfversion
+                  self.release = lsfversion
             if self.vendor is None:
                   self.vendor = 'IBM Corporation'
             if self.packager is None:
@@ -53,12 +53,12 @@ Warning: The compatibility of the LSF Python API package is not guaranteed
 
 if sys.argv[1] == 'bdist_rpm' :
     lsidout = os.popen('lsid | head -1').readlines()
-    lsfversion = "lsf"+lsidout[0].split()[4].split(',')[0]
+    lsfversion = lsidout[0].split()[4].split(',')[0]
 
-setup(name='spectrum-lsf-python-api',
+setup(name='lsf-pythonapi',
       version='1.0.5',
-      description='Python binding for Spectrum LSF APIs',
-      long_description='Python binding for Spectrum LSF APIs',
+      description='Python binding for IBM Spectrum LSF APIs',
+      long_description='Python binding for IBM Spectrum LSF APIs',
       license='LGPL',
       keywords='LSF,Grid,Cluster,HPC',
       url='https://github.com/IBMSpectrumComputing/lsf-python-api',
