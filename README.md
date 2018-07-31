@@ -53,7 +53,9 @@ Resulting RPMs will be placed in the dist directory
 ## Release Notes
 
 ### Release 1.0.5
-- Resolve compability issue
+- Resolve compatibility issue
+    * The issue is due to dynamic library. From now on, the static library will 
+      be used by LSF Python API pacakge.
     * For Linux ppc64le, IBM XL C/C++ compiler should be installed firstly.
     * For LSF 10.1.0.2 or earlier version, the compatibility is not guaranteed
       if you update LSF at a later time. To avoid this compatibility issue, 
@@ -63,6 +65,10 @@ Resulting RPMs will be placed in the dist directory
     * For creating RPM package on Linux ppc64le platform, executing the following 
       instruction not to create debug information package due to compatibility issue:
           `$ echo '%debug_package %{nil}' >> ~/.rpmmacros`
+
+- Release RPM binary package for ppc64le platform
+
+    * lsf-pythonapi-10.1.0.6.csm.ppc64le.rpm
 
 ### Release 1.0.4
 
