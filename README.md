@@ -115,7 +115,7 @@ Community contributions to this repository must follow the [IBM Developer's Cert
 
 ## Copyright
 
-(C) Copyright IBM Corporation 2016-2017
+(C) Copyright IBM Corporation 2016-2018
 
 U.S. Government Users Restricted Rights - Use, duplication or disclosure 
 restricted by GSA ADP Schedule Contract with IBM Corp.
