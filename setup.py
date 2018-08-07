@@ -25,9 +25,14 @@ class bdist_rpm_custom(bdist_rpm):
             bdist_rpm.finalize_package_data(self)
 
 if os.uname()[0] == 'Linux' and os.uname()[4] == 'ppc64le' :
-    if os.access('/usr/bin/xlc', os.F_OK) :
-        os.environ["LDSHARED"]  = "/usr/bin/xlc -pthread -shared -Wl,-z,relro"
-    else:
+    found_xlc = False
+    for path in os.environ["PATH"].split(os.pathsep):
+        xlc_path = os.path.join(path, 'xlc')
+        if os.access(xlc_path, os.F_OK):
+            found_xlc = True
+            os.environ["LDSHARED"]  = "%s -pthread -shared -Wl,-z,relro" % xlc_path
+            break
+    if found_xlc == False:
         print '''
 Error: Cannot find IBM XL C/C++ compiler. To download and install the Community 
        Edition of the IBM XL C/C++ compiler at no charge, 
