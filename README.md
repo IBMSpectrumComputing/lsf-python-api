@@ -8,9 +8,9 @@ If you plan or would like to contribute to the library, you must follow the DCO 
 
 * IBM Spectrum LSF Python Wrappers
 * Supporting LSF Release: 10.1
-* Wrapper Version: 1.0.5
+* Wrapper Version: 1.0.6
 * Publication date: 16 October 2013
-* Last modified: 20 July 2018
+* Last modified: 31 August 2018
 
 ## Contents
 
@@ -34,6 +34,8 @@ Please note you must use lsf.lsb_init before any other LSBLIB library routine in
 
 ## Installation
 
+NOTE: Please notice the swig version should be 2.0 or higher.
+
 Before compiling the library, set the LSF environment variables:
 
 `$ source profile.lsf`
@@ -42,16 +44,27 @@ To compile and install the library, go to the main source directory
 and type:
 
 `$ python setup.py build`
+or `$ python3 setup.py build`
 
 `$ sudo python setup.py install`
+or `$ sudo python3 setup.py install`
 
 To instead build an RPM:
 
 `$ python setup.py bdist_rpm`
+or `$ python3 setup.py bdist_rpm`
 
 Resulting RPMs will be placed in the dist directory
 
 ## Release Notes
+
+### Release 1.0.6
+- Support Python3
+    * If you install Python2 and Python3 in the different directories on the same host, 
+      you may build & install LSF Python API package separately with Python2 and Python3. 
+      After doing this, you can run Python2 script or Python3 script by using 
+         `$ python your_lsf_script`
+      or `$ python3 your_lsf_script`.
 
 ### Release 1.0.5
 - Resolve compatibility issue

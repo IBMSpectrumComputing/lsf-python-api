@@ -10,6 +10,7 @@ import os, sys
 import time
 from distutils.core import setup, Extension
 from distutils.command.bdist_rpm import bdist_rpm
+from distutils.command.install import INSTALL_SCHEMES
 
 class bdist_rpm_custom(bdist_rpm):
       """bdist_rpm that sets custom RPM options"""
@@ -33,11 +34,11 @@ if os.uname()[0] == 'Linux' and os.uname()[4] == 'ppc64le' :
             os.environ["LDSHARED"]  = "%s -pthread -shared -Wl,-z,relro" % xlc_path
             break
     if found_xlc == False:
-        print '''
+        print('''
 Error: Cannot find IBM XL C/C++ compiler. To download and install the Community 
        Edition of the IBM XL C/C++ compiler at no charge, 
        refer to https://ibm.biz/BdYHna.
-'''
+''')
         sys.exit()
 
 if os.access(os.environ['LSF_LIBDIR'] + "/liblsbstream.a", os.F_OK):
@@ -60,16 +61,27 @@ if sys.argv[1] == 'bdist_rpm' :
     lsidout = os.popen('lsid | head -1').readlines()
     lsfversion = lsidout[0].split()[4].split(',')[0]
 
+for scheme in INSTALL_SCHEMES.values():
+    scheme['data'] = scheme['platlib']
+
+inc_path = os.path.abspath('pythonlsf')
+
+if 'LSF_PYTHONAPI_INCPATH' not in os.environ:
+    os.environ['LSF_PYTHONAPI_INCPATH'] = inc_path
+else:
+    inc_path = os.environ['LSF_PYTHONAPI_INCPATH']
+
 setup(name='lsf-pythonapi',
-      version='1.0.5',
+      version='1.0.6',
       description='Python binding for IBM Spectrum LSF APIs',
       long_description='Python binding for IBM Spectrum LSF APIs',
-      license='LGPL',
+      license='EPL',
       keywords='LSF,Grid,Cluster,HPC',
       url='https://github.com/IBMSpectrumComputing/lsf-python-api',
       ext_package='pythonlsf',
+      data_files=[('pythonlsf', ['LICENSE'])],
       ext_modules=[Extension('_lsf', ['pythonlsf/lsf.i'],
-                               include_dirs=['/usr/include/python2.4'],
+                               include_dirs=['/usr/include/python2.4', inc_path],
                                library_dirs=[os.environ['LSF_LIBDIR']],
                                swig_opts=['-I' + os.environ['LSF_LIBDIR'] + '/../../include/lsf/', 
                                           '-DOS_HAS_THREAD -D_REENTRANT'],
@@ -97,4 +109,4 @@ setup(name='lsf-pythonapi',
      )
 
 if warning_msg :
-    print warning_msg 
+    print(warning_msg)

@@ -1,5 +1,3 @@
-#! /usr/bin/env python
-
 from pythonlsf import lsf
 
 def queryHostGroupInfo():
@@ -14,11 +12,13 @@ def queryHostGroupInfo():
     lsf.stringArray_setitem(strArr, 1, "hg2");
     for hgroupInfo in lsf.get_hostgroup_info_by_name(strArr,2):
         if hgroupInfo != None:
-            print 'hgroup name = %s' % hgroupInfo.group;
-            print 'hgroup list = %s' % hgroupInfo.memberList;
+            print('hgroup name = %s' % hgroupInfo.group);
+            print('hgroup list = %s' % hgroupInfo.memberList);
         else:
-            print 'hgroupInfo is null'
+            print('hgroupInfo is null')
             return -1;
+
+    lsf.delete_stringArray(strArr);
 
     return 0;
 

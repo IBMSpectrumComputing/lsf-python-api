@@ -1,5 +1,3 @@
-#! /usr/bin/env python
-
 from pythonlsf import lsf
 import sys
 
@@ -31,6 +29,10 @@ def read_eventrec(path):
     lineNum = lsf.new_intp()
     lsf.intp_assign(lineNum, 0)
     fp = lsf.fopen(path, "r")
+    if fp is None:
+        print("The file %s does not exist." % path)
+        sys.exit(1)
+
     flag = 1
 
     if lsf.lsb_init("test") > 0:

@@ -1,5 +1,3 @@
-#! /usr/bin/env python
-
 from pythonlsf import lsf
 
 def query_queue(queue_name):
@@ -18,13 +16,13 @@ def query_queue(queue_name):
     #print lsf.stringArray_getitem(strArr, 0);
     queueInfo = lsf.lsb_queueinfo(strArr,intp_num_queues,None,None,0);
     if queueInfo != None:
-        print 'queueInfo is not null';
+        print('queueInfo is not null')
     else:
-        print 'queueInfo is null'
+        print('queueInfo is null')
         return -1;
 
-    print 'queue name = %s' % queueInfo.queue;
-    print 'queue description = %s' % queueInfo.description; 
+    print('queue name = %s' % queueInfo.queue)
+    print('queue description = %s' % queueInfo.description)
 
     return 0;
 
@@ -37,9 +35,9 @@ def printQueueInfo():
 #    lsf.stringArray_setitem(strArr, 1, "short");
 
     for info in lsf.get_queue_info_by_name(strArr, 1):
-        print info.queue;
-        print info.description;
-        print ''
+        print(info.queue)
+        print(info.description)
+        print('')
 
     return 0;
     

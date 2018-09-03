@@ -18,6 +18,7 @@ int fclose(FILE *f);
 #define SWIG_FILE_WITH_INIT
 #include "lsf.h"
 #include "lsbatch.h"
+#include "lib.table.h"
 %}
 
 %pointer_functions(int, intp)
@@ -26,7 +27,6 @@ int fclose(FILE *f);
 %pointer_functions(LS_LONG_INT, LS_LONG_INT_POINTER)
 %array_functions(int, intArray)
 %array_functions(float, floatArray)
-%array_functions(char *, stringArray)
 %array_functions(struct dependJobs, dependJobsArray)
 %array_functions(long, longArray)
 
@@ -52,6 +52,94 @@ PyObject * char_p_p_to_pylist(PyObject* ptrobj, int size){
 PyObject * string_array_to_pylist(PyObject* ptrobj, int size){
     return char_p_p_to_pylist(ptrobj,size);
 }
+
+/* For compatibility issue, the following 2 functions are added in LSF10.
+   So they don't exist on LSF9.1.3 or earlier*/
+#ifdef WIN32
+    typedef __int64 LSF_LONG_INT;
+    typedef unsigned __int64 LSF_UNS_LONG_INT;
+    #define LSF_LONG_FORMAT "%I64d"
+    #define LSF_UNS_LONG_FORMAT "%I64u"
+#elif defined (__alpha)
+    typedef long long int LSF_LONG_INT;
+    typedef unsigned long long LSF_UNS_LONG_INT;
+    #define LSF_LONG_FORMAT ("%ld")
+    #define LSF_UNS_LONG_FORMAT ("%lu")
+#else
+    typedef long long int LSF_LONG_INT;
+    typedef unsigned long long LSF_UNS_LONG_INT;
+    #define LSF_LONG_FORMAT ("%lld")
+    #define LSF_UNS_LONG_FORMAT ("%llu")
+#endif /* WIN32 */
+
+static hEnt * h_addEntByNumber_pythonapi(hTab *tabPtr, LSF_LONG_INT key, int *newPtr) {
+
+    char skey[64]; /* The space is big enough. The length of 64bit uint is 20bits.*/
+
+    sprintf(skey, LSF_UNS_LONG_FORMAT, key);
+
+    return h_addEnt_(tabPtr, skey, newPtr);
+}
+
+static hEnt * h_getEntByNumber_pythonapi(hTab *tabPtr, LSF_LONG_INT key) {
+
+    char skey[64]; /* The space is big enough. The length of 64bit uint is 20bits.*/
+
+    sprintf(skey, LSF_UNS_LONG_FORMAT, key);
+
+    return h_getEnt_(tabPtr, skey);
+}
+
+static struct hTab stringArraySize_htab;
+static int stringArraySize_htab_init_flag;
+
+static char ** new_stringArray(size_t nelements) {
+    
+    char ** ret = NULL;
+    
+    if ( !stringArraySize_htab_init_flag) {
+        stringArraySize_htab_init_flag = 1;
+        h_initTab_(&stringArraySize_htab, 1024);
+    }
+
+    ret = (char **)calloc(nelements, sizeof(char *));
+
+    if ( ret) {
+        hEnt * ent = h_addEntByNumber_pythonapi(&stringArraySize_htab, (LSF_LONG_INT)ret, NULL);
+
+        ent->hData = (int *) malloc(sizeof(int));
+        *ent->hData = nelements;
+    }
+
+    return ret;
+}
+
+static void delete_stringArray(char * *ary) {
+    if( stringArraySize_htab_init_flag) {
+        hEnt * ent = h_getEntByNumber_pythonapi(&stringArraySize_htab, (LSF_LONG_INT) ary);
+
+        if (ent) {
+            int i = 0, nelements = *ent->hData;
+            for(; i<nelements; i++) {
+                if (ary[i]) {
+                    free(ary[i]);
+                    ary[i] = NULL;
+                }
+            }
+            h_delEnt_(&stringArraySize_htab, ent); 
+        }
+    }
+
+    free((char*)ary);
+}
+
+static char * stringArray_getitem(char * *ary, size_t index) {
+  return ary[index];
+}
+static void stringArray_setitem(char * *ary, size_t index, char * value) {
+  ary[index] = strdup(value);
+}
+
 %}
 
 %array_class(struct queueInfoEnt, queueInfoEntArray);
@@ -130,6 +218,7 @@ PyObject * string_array_to_pylist(PyObject* ptrobj, int size){
 %ignore lsb_jobidindex2str;
 %ignore LOG_VERSION;
 %ignore ls_errmsg;
+%ignore lsf_suite_edition;
 
 // Following are ignored from lsbatch.h
 
@@ -139,6 +228,8 @@ PyObject * string_array_to_pylist(PyObject* ptrobj, int size){
 %ignore getHostGpuNvlinkInfoFromStr;
 %ignore fairshare_adjustment;
 %ignore FairAdjustPairArrayName;
+%ignore lsb_switch;
+%ignore lsb_liveconfigPack;
 
 // Now include the rest...
 
