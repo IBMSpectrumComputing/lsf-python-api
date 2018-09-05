@@ -32,6 +32,28 @@ This software is Licensed under the Eclipse Public License.
 
 Please note you must use lsf.lsb_init before any other LSBLIB library routine in your application.
 
+## Support Environment
+
+ - OS
+ 
+   	This package is only tested on Linux platform.
+
+ - SWIG
+
+        The version should be 2.0 or higher.
+
+ - Python
+
+        Python2 and Python3 are all supported.
+
+ - Compatibility
+
+        For LSF 10.1.0.2 or earlier version, the compatibility is not guaranteed
+      	if you update LSF at a later time. To avoid this compatibility issue, 
+      	update LSF to version 10.1.0.3, or later, then rebuild and reinstall the 
+      	LSF Python API package.
+        
+
 ## Installation
 
 NOTE: Please notice the swig version should be 2.0 or higher.
