@@ -16,6 +16,7 @@ int fclose(FILE *f);
 
 %{
 #define SWIG_FILE_WITH_INIT
+//#define LSF_SIMULATOR
 #include "lsf.h"
 #include "lsbatch.h"
 #include "lib.table.h"
@@ -29,6 +30,7 @@ int fclose(FILE *f);
 %array_functions(float, floatArray)
 %array_functions(struct dependJobs, dependJobsArray)
 %array_functions(long, longArray)
+%array_functions(struct eventRec *, eventRecPtrArray)
 
 //helper function for transforming char** to python list
 %inline %{
