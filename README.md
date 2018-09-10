@@ -32,21 +32,33 @@ This software is Licensed under the Eclipse Public License.
 
 Please note you must use lsf.lsb_init before any other LSBLIB library routine in your application.
 
-## Support Environment
+## Supported Environment
 
  - OS
  
-   	This package is only tested on Linux platform.
+   	This package is only tested on Linux platforms.
+
+        Supported operating systems: 
+		Linux 2.6 glibc 2.3 x86 64 bit: RHEL 6.2, RHEL6.4, RHEL6.5, RHEL6.8
+		Linux 3.10 glibc 2.17 x86 64 bit: Red Hat 7.4, 7.5
+		Linux for Power Systems Servers 8 Little Endian (Linux 3.10, glibc 2.17): RHEL 7.4
+		Linux for Power Systems Servers 9 Little Endian (Linux 4.14, glibc 2.17): RHEL 7.5
 
  - SWIG
 
-        The version should be 2.0 or higher.
+        SWIG version 2.0, or later
+
+	The following versions are tested:
+		SWIG: 2.0.10, 3.0.12
 
  - Python
 
         Python2 and Python3 are all supported.
 
- - Compatibility
+	The following versions are tested:
+		Python 2.6.6, 2.7.15, 3.0, 3.6.0, 3.7.0
+
+## Compatibility
 
         For LSF 10.1.0.2 or earlier version, the compatibility is not guaranteed
       	if you update LSF at a later time. To avoid this compatibility issue, 
@@ -55,8 +67,6 @@ Please note you must use lsf.lsb_init before any other LSBLIB library routine in
         
 
 ## Installation
-
-NOTE: Please notice the swig version should be 2.0 or higher.
 
 Before compiling the library, set the LSF environment variables:
 
