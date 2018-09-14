@@ -42,6 +42,6 @@ def printQueueInfo():
     return 0;
     
 if __name__ == '__main__':
-    print("LSF Clustername is :", lsf.ls_getclustername())
+    print("LSF Clustername is : {}".format(lsf.ls_getclustername()))
     print(query_queue("normal"))
     printQueueInfo()

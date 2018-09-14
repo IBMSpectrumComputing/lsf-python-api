@@ -31,6 +31,7 @@ int fclose(FILE *f);
 %array_functions(struct dependJobs, dependJobsArray)
 %array_functions(long, longArray)
 %array_functions(struct eventRec *, eventRecPtrArray)
+%array_functions(struct appInfoEnt, appInfoEntArray)
 
 //helper function for transforming char** to python list
 %inline %{
