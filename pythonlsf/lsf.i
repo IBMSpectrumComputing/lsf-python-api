@@ -32,6 +32,7 @@ int fclose(FILE *f);
 %array_functions(long, longArray)
 %array_functions(struct eventRec *, eventRecPtrArray)
 %array_functions(struct appInfoEnt, appInfoEntArray)
+%array_functions(struct gpuRusage, gpuRusageArray)
 
 //helper function for transforming char** to python list
 %inline %{
@@ -142,6 +143,23 @@ static char * stringArray_getitem(char * *ary, size_t index) {
 static void stringArray_setitem(char * *ary, size_t index, char * value) {
   ary[index] = strdup(value);
 }
+
+#if defined(FLAG_PYTHONAPI_KEYVALUE_T)
+  static struct keyVal *new_keyValArray(size_t nelements) {
+    return (struct keyVal *)malloc((nelements)*sizeof(struct keyVal));
+  }
+
+  static void delete_keyValArray(struct keyVal *ary) {
+    free((char*)ary);
+  }
+
+  static struct keyVal keyValArray_getitem(struct keyVal *ary, size_t index) {
+    return ary[index];
+  }
+  static void keyValArray_setitem(struct keyVal *ary, size_t index, struct keyVal value) {
+    ary[index] = value;
+  }
+#endif
 
 %}
 
