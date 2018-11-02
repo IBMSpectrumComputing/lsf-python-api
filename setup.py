@@ -47,6 +47,16 @@ def is_keyvalue_defined(lsbatch_h_path):
         cc = re.search('[\s]*typedef struct keyVal[\s]*', f.read())
     return cc
 
+gccflag_lsfversion = '-DNOLSFVERSION' 
+def set_gccflag_lsf_version():
+    global gccflag_lsfversion 
+    _lsf_envdir = os.environ['LSF_ENVDIR']
+    with open('{}/lsf.conf'.format(_lsf_envdir), 'r') as f:
+        _lsf_version = re.search('LSF_VERSION=(.*)', f.read()).group(1).strip() 
+    if _lsf_version == '10.1' :
+        gccflag_lsfversion= '-DLSF_VERSION_101'
+        
+
 if os.uname()[0] == 'Linux' and os.uname()[4] == 'ppc64le' :
     found_xlc = False
     for path in os.environ["PATH"].split(os.pathsep):
@@ -67,6 +77,8 @@ LSF_LIBDIR = get_lsf_libdir()
 if LSF_LIBDIR is None :
     print('Error: LSF_LIBDIR can not be got.')
     sys.exit()
+
+set_gccflag_lsf_version()
 
 LSF_INCDIR = LSF_LIBDIR + '/../../include/lsf'
 gccflag_keyvaluet = '-DNOTDEFINEFLAG_PYTHONAPI_KEYVALUE_T' 
@@ -117,10 +129,12 @@ setup(name='lsf-pythonapi',
                                library_dirs=[LSF_LIBDIR],
                                swig_opts=['-I' + LSF_LIBDIR + '/../../include/lsf/', 
                                        #   '-DLSF_SIMULATOR',
-                                          '-DOS_HAS_THREAD -D_REENTRANT', gccflag_keyvaluet],
+                                          '-DOS_HAS_THREAD -D_REENTRANT', 
+                                            gccflag_keyvaluet, gccflag_lsfversion],
                                extra_compile_args=['-m64', 
                                     '-I' + LSF_LIBDIR + '/../../include/lsf/', 
                                     '-Wno-strict-prototypes', gccflag_keyvaluet,
+                                    gccflag_lsfversion,
                                     '-DOS_HAS_THREAD -D_REENTRANT', #For multi-thread lib, lserrno
                                     '-Wp,-U_FORTIFY_SOURCE', #The flag needs -O option. Undefine it for warning.
                                     '-O0'], 
