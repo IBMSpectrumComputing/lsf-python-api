@@ -448,4 +448,55 @@ PyObject * get_conf_value(char *name, char *path) {
     }
 }
 
+PyObject * get_app_info_all() {
+    struct appInfoEnt* appinfo;
+    int    numapps = 0;
+
+    appinfo = lsb_appInfo(&numapps);
+
+    PyObject *result = PyList_New(numapps);
+    int i;
+    for (i = 0; i < numapps; i++) {
+        PyObject *o = SWIG_NewPointerObj(SWIG_as_voidptr(&appinfo[i]),
+                                         SWIGTYPE_p_appInfoEnt, 0 |  0 );
+        PyList_SetItem(result,i,o);
+    }
+
+    return result;
+}
+
+PyObject * get_user_info_all() {
+    struct userInfoEnt* userinfo;
+    int    numusers = 0;
+
+    userinfo = lsb_userinfo(NULL,&numusers);
+
+    PyObject *result = PyList_New(numusers);
+    int i;
+    for (i = 0; i < numusers; i++) {
+        PyObject *o = SWIG_NewPointerObj(SWIG_as_voidptr(&userinfo[i]),
+                                         SWIGTYPE_p_userInfoEnt, 0 |  0 );
+        PyList_SetItem(result,i,o);
+    }
+
+    return result;
+}
+
+PyObject * get_usergroup_info_all() {
+    struct groupInfoEnt* groupinfo;
+    int    numgrps = 0;
+
+    groupinfo = lsb_usergrpinfo(NULL,&numgrps,GRP_ALL);
+
+    PyObject *result = PyList_New(numgrps);
+    int i;
+    for (i = 0; i < numgrps; i++) {
+        PyObject *o = SWIG_NewPointerObj(SWIG_as_voidptr(&groupinfo[i]),
+                                         SWIGTYPE_p_groupInfoEnt, 0 |  0 );
+        PyList_SetItem(result,i,o);
+    }
+
+    return result;
+}
+
 %}
