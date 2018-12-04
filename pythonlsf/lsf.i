@@ -32,6 +32,7 @@ int fclose(FILE *f);
 %array_functions(long, longArray)
 %array_functions(struct eventRec *, eventRecPtrArray)
 %array_functions(struct appInfoEnt, appInfoEntArray)
+%array_functions(struct shareAcctInfoEnt, shareAcctInfoEntArray)
 #ifdef LSF_VERSION_101
 %array_functions(struct gpuRusage, gpuRusageArray)
 #endif
