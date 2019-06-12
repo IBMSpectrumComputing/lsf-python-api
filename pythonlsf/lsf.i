@@ -8,6 +8,7 @@
 
 /* File: lsf.i */
 %module lsf
+%include "cmalloc.i"
 %include "cpointer.i"
 %include "carrays.i"
 
@@ -26,11 +27,16 @@ int fclose(FILE *f);
 %pointer_functions(float, floatp)
 %pointer_functions(long, longp)
 %pointer_functions(LS_LONG_INT, LS_LONG_INT_POINTER)
+%pointer_functions(limitInfoEnt *, limitInfoEntPtrPtr)
+
+%allocators(limitInfoEnt *, limitInfoEntPtrPtr);
+
 %array_functions(int, intArray)
 %array_functions(float, floatArray)
 %array_functions(struct dependJobs, dependJobsArray)
 %array_functions(long, longArray)
 %array_functions(struct eventRec *, eventRecPtrArray)
+%array_functions(limitInfoEnt, limitInfoEntArray)
 %array_functions(struct appInfoEnt, appInfoEntArray)
 %array_functions(struct shareAcctInfoEnt, shareAcctInfoEntArray)
 #ifdef LSF_VERSION_101
