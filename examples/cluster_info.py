@@ -11,6 +11,10 @@ print('{0:15s} {1:20s} {2:20s} {3:5s} {4:4s}'.format('Hostname', 'Type',
                                                      'Model', 'Cores', 'Load'))
 
 for info in lsf.get_host_info():
+
+    if info.isServer == '\x00': #just skip LSF client host
+        continue
+
     #Deal with the case when hostname contain "-".
     if '-' in info.hostName:
         load = lsf.get_host_load("hname=" + "'" + info.hostName + "'", lsf.R15M)
@@ -23,7 +27,7 @@ for info in lsf.get_host_info():
     print('{0:15s} {1:20s} {2:20s} {3:5d} {4:4.2f}'.format(info.hostName,
                                                            info.hostType,
                                                            info.hostModel,
-                                                           info.cores,
+                                                           info.cores * info.pprocs,
                                                            load))
 
     resources = ""
