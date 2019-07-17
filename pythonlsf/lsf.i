@@ -175,6 +175,9 @@ static void stringArray_setitem(char * *ary, size_t index, char * value) {
 %array_class(struct queueInfoEnt, queueInfoEntArray);
 %array_class(struct hostInfoEnt, hostInfoEntArray);
 %array_class(struct hostLoad, hostLoadArray);
+%array_class(struct _limitItem, limitItemArray)
+%array_class(struct _limitConsumer, limitConsumerArray)
+%array_class(struct _limitResource, limitResourceArray)
 
 // handle int arrays
 %typemap(in) int [ANY] (int temp[$1_dim0]) {
