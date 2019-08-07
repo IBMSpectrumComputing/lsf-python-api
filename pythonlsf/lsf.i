@@ -12,6 +12,10 @@
 %include "cpointer.i"
 %include "carrays.i"
 
+#ifdef WIN32
+%include <windows.i>
+#endif
+
 FILE *fopen(char *filename, char *mode);
 int fclose(FILE *f);
 
@@ -71,6 +75,8 @@ PyObject * string_array_to_pylist(PyObject* ptrobj, int size){
 #ifdef WIN32
     typedef __int64 LSF_LONG_INT;
     typedef unsigned __int64 LSF_UNS_LONG_INT;
+    typedef __int64 uid_t;
+    typedef __int64 gid_t;
     #define LSF_LONG_FORMAT "%I64d"
     #define LSF_UNS_LONG_FORMAT "%I64u"
 #elif defined (__alpha)
