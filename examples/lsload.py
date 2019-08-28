@@ -1,5 +1,6 @@
 from pythonlsf import lsf
 import ctypes
+import platform
 
 def printHostInfo():
     if lsf.lsb_init("test") > 0:
@@ -15,8 +16,11 @@ def printHostInfo():
 
     for i in range(nhosts) :
         host = all_lsload_data[i]
-        hostname = ctypes.cast( host.hostName, ctypes.c_char_p)
-        print('No.{} host name : {}'.format(i, hostname.value))
+        if platform.system() == 'Windows':
+            print('No.{} host name : {}'.format(i, host.hostName))
+        else:
+            hostname = ctypes.cast( host.hostName, ctypes.c_char_p)
+            print('No.{} host name : {}'.format(i, hostname.value))
 
     return 0
 
