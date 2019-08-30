@@ -3,5 +3,6 @@ msbuild lsf.sln -property:Configuration=Release
 cp X64\Release\_lsf.pyd ..\pythonlsf\
 cp X64\Release\_lsf.lib ..\pythonlsf\
 cp X64\Release\_lsf.exp ..\pythonlsf\
+cp %LSF_LIB%\liblsbstream.dll ..\pythonlsf\
 
 
