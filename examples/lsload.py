@@ -1,6 +1,4 @@
 from pythonlsf import lsf
-import ctypes
-import platform
 
 def printHostInfo():
     if lsf.lsb_init("test") > 0:
@@ -8,19 +6,14 @@ def printHostInfo():
 
     intp_nhosts = lsf.new_intp()
     lsf.intp_assign(intp_nhosts, 0) 
-    hostsdata = lsf.ls_load(None, intp_nhosts, 0, None)
+    all_lsload_data = lsf.ls_load_py(None, intp_nhosts, 0, None)
     nhosts = lsf.intp_value(intp_nhosts)
-    all_lsload_data = lsf.hostLoadArray_frompointer(hostsdata)
 
     print("{} hosts in the cluster.".format(nhosts))
 
     for i in range(nhosts) :
         host = all_lsload_data[i]
-        if platform.system() == 'Windows':
-            print('No.{} host name : {}'.format(i, host.hostName))
-        else:
-            hostname = ctypes.cast( host.hostName, ctypes.c_char_p)
-            print('No.{} host name : {}'.format(i, hostname.value))
+        print('No.{} host name : {}'.format(i, host.hostName))
 
     return 0
 
