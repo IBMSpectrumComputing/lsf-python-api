@@ -28,8 +28,10 @@ int fclose(FILE *f);
 %pointer_functions(long, longp)
 %pointer_functions(LS_LONG_INT, LS_LONG_INT_POINTER)
 %pointer_functions(limitInfoEnt *, limitInfoEntPtrPtr)
+%pointer_functions(guaranteedResourcePoolEnt *, guaranteedResourcePoolEntPtrPtr)
 
 %allocators(limitInfoEnt *, limitInfoEntPtrPtr);
+%allocators(guaranteedResourcePoolEnt *, guaranteedResourcePoolEntPtrPtr);
 
 %array_functions(int, intArray)
 %array_functions(float, floatArray)
@@ -37,6 +39,7 @@ int fclose(FILE *f);
 %array_functions(long, longArray)
 %array_functions(struct eventRec *, eventRecPtrArray)
 %array_functions(limitInfoEnt, limitInfoEntArray)
+%array_functions(guaranteedResourcePoolEnt, guaranteedResourcePoolEntArray)
 %array_functions(struct appInfoEnt, appInfoEntArray)
 %array_functions(struct shareAcctInfoEnt, shareAcctInfoEntArray)
 #ifdef LSF_VERSION_101
@@ -178,6 +181,7 @@ static void stringArray_setitem(char * *ary, size_t index, char * value) {
 %array_class(struct _limitItem, limitItemArray)
 %array_class(struct _limitConsumer, limitConsumerArray)
 %array_class(struct _limitResource, limitResourceArray)
+%array_class(struct _guarConsumer, guarConsumerArray)
 
 // handle int arrays
 %typemap(in) int [ANY] (int temp[$1_dim0]) {
