@@ -46,6 +46,7 @@ int fclose(FILE *f);
 #ifdef LSF_VERSION_101
 %array_functions(struct gpuRusage, gpuRusageArray)
 #endif
+%array_functions(LS_LONG_INT, LS_LONG_INTArray)
 
 //helper function for transforming char** to python list
 %inline %{
