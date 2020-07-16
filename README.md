@@ -1,4 +1,4 @@
-# IBM Spectrum LSF Python
+# IBM Spectrum LSF Python API
 
 These python wrappers allow customers to submit and control jobs and obtain status of queues, hosts and other LSF attributes from Python directly.  They work with various versions of LSF and are maintained by LSF developement, though we take contributions from the Open Source community.
 
