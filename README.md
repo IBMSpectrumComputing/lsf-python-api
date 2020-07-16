@@ -14,13 +14,13 @@ If you plan or would like to contribute to the library, you must follow the DCO 
 
 ## Contents
 
-[* Introduction ](#13-Introduction)
+* Introduction
 * Supported Environment
 * Compatibility
 * Installation
 * Release Notes
 * Community Contribution Requirements
-[* Copyright](#19-Copyright)
+* Copyright
 
 ## Introduction
 
