@@ -1,4 +1,4 @@
-# platform-python-lsf-api
+# IBM Spectrum LSF Python
 
 These python wrappers allow customers to submit and control jobs and obtain status of queues, hosts and other LSF attributes from Python directly.  They work with various versions of LSF and are maintained by LSF developement, though we take contributions from the Open Source community.
 
@@ -15,11 +15,13 @@ If you plan or would like to contribute to the library, you must follow the DCO 
 ## Contents
 
 * Introduction
+* Supported Environment
+* Compatibility
 * Installation
 * Release Notes
-* Community Contribution
+* Community Contribution Requirements
 * Copyright
- 
+
 ## Introduction
 
 This library allows you to call the LSF APIs directly through Python. The wrapper is created using Pythons SWIG interface and links directly to LSF's shared libraries. 
