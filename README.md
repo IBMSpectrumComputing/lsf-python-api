@@ -24,7 +24,7 @@ If you plan or would like to contribute to the library, you must follow the DCO 
 
 ## Introduction
 
-This library allows you to call the LSF APIs directly through Python. The wrapper is created using Pythons SWIG interface and links directly to LSF's shared libraries. 
+This library allows you to call the LSF APIs directly through Python. You can find [some samples here](https://github.com/IBMSpectrumComputing/lsf-python-api/tree/master/examples). The wrapper is created using Pythons SWIG interface and links directly to LSF's shared libraries. 
 
 You are encouraged to contribute your own Python wrappers to the Open Source LSF APIs for Python, and you may find some examples in [IBM Support Community](https://www.ibm.com/mysupport/s/ibm-community-support-search-results?q=LSF+Python+API&page=1&sort=0).
 
