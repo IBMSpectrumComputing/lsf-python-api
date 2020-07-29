@@ -546,4 +546,30 @@ PyObject * get_usergroup_info_all() {
     return result;
 }
 
+PyObject * get_queue_info_all() {
+    struct queueInfoEnt *queueinfo;
+    char *resreq;
+    int numqueues = 0;
+    int options = 0;
+
+    resreq="";
+
+    queueinfo = lsb_queueinfo(resreq,             // Return queries as C queueInfoEnt*
+                  &numqueues, NULL, 0, options);
+
+    PyObject *result = PyList_New(numqueues);     // Create PyObject * to get C returns
+    int i;
+    for (i = 0; i < numqueues; i++) {             // Save queries in a loop to result
+        PyObject *o = SWIG_NewPointerObj(SWIG_as_voidptr(&queueinfo[i]),
+                                         SWIGTYPE_p_queueInfoEnt, 0 | 0 );
+        PyList_SetItem(result,i,o);
+    }
+
+    return result;
+}
+
+int get_lsb_errno() {
+    return lsberrno;
+}
+
 %}
