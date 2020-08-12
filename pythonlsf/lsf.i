@@ -572,4 +572,8 @@ int get_lsb_errno() {
     return lsberrno;
 }
 
+char * get_lsb_sysmsg() {
+    return lsb_sysmsg();
+}
+
 %}
