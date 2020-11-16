@@ -416,6 +416,24 @@ PyObject * get_host_load(char *resreq, int index) {
     return result;
 }
 
+PyObject * get_host_load_from_batch (
+                               char * resreq, 
+                                int   index) {
+
+                   int   numhosts = 0; 
+    struct hostInfoEnt * hinfo    = NULL;
+
+    hinfo = lsb_hostinfo_ex (NULL, &numhosts, resreq, 0);
+    if (hinfo == NULL || numhosts > 1) { 
+        lsb_perror("lsb_hostinfo_ex"); 
+        exit(-1); 
+    }
+
+    PyObject *result = PyFloat_FromDouble(hinfo[0].load[index]);
+    return result;
+}
+
+
 PyObject * ls_load_py(char *resreq, int *numhosts, int options, char *fromhost) {
 
     struct hostLoad * hosts = NULL; 
