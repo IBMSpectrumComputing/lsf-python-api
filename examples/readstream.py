@@ -60,6 +60,8 @@ def read_eventrec(path):
         else:
             flag = 0
 
+    lsf.lsb_closestream(path)
+
 def read_streamline(path):
     """
     Use lsb_readstreamline() to parse the file
@@ -90,4 +92,5 @@ if __name__ == '__main__':
 #    read_eventrec("/home/youname/lsf_top/work/yourcluster/logdir/stream/lsb.stream")
 #    read_streamline("/home/youname/lsf_top/work/yourcluster/logdir/stream/lsb.stream")
     #read_streamline(sys.argv[1])
+    read_eventrec(sys.argv[1])
     read_eventrec(sys.argv[1])
