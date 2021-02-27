@@ -566,14 +566,12 @@ PyObject * get_usergroup_info_all() {
 
 PyObject * get_queue_info_all() {
     struct queueInfoEnt *queueinfo;
-    char *resreq;
+    char **queues = NULL;
     int numqueues = 0;
     int options = 0;
 
-    resreq="";
-
-    queueinfo = lsb_queueinfo(resreq,             // Return queries as C queueInfoEnt*
-                  &numqueues, NULL, 0, options);
+    // Return queries as C queueInfoEnt*
+    queueinfo = lsb_queueinfo(queues, &numqueues, NULL, 0, options);
 
     PyObject *result = PyList_New(numqueues);     // Create PyObject * to get C returns
     int i;
