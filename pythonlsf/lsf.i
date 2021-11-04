@@ -463,6 +463,110 @@ PyObject * ls_load_py(char *resreq, int *numhosts, int options, char *fromhost) 
     return result;
 }
 
+PyObject * ls_info_py() {
+    struct resItem * allRes = NULL;
+    struct lsInfo * allInfo = NULL;
+    char *type = NULL;
+    char *model = NULL;
+    char *arch = NULL;
+    
+    int i = 0, j = 0;
+
+    allInfo = ls_info();
+    if (allInfo == NULL) {
+        ls_perror("ls_info_py");
+        exit(-1);
+    }
+
+    PyObject * result = PyDict_New();
+    PyObject * nRes = Py_BuildValue("i",allInfo->nRes);
+    PyDict_SetItemString(result, "nRes",nRes);
+    PyObject * nTypes = Py_BuildValue("i", allInfo->nTypes);
+    PyDict_SetItemString(result, "nTypes", nTypes);
+    PyObject * nModels = Py_BuildValue("i", allInfo->nModels);
+    PyDict_SetItemString(result, "nModels", nModels);
+    PyObject * numIndx = Py_BuildValue("i", allInfo->numIndx);
+    PyDict_SetItemString(result, "numIndx", numIndx);
+    PyObject * numUsrIndx = Py_BuildValue("i", allInfo->numUsrIndx);
+    PyDict_SetItemString(result, "numUsrIndx", numUsrIndx);
+
+    allRes = allInfo->resTable;
+    for (i = 0; i < allInfo->nRes; i++) {
+        int size_string = sizeof(allRes[i].name);
+        int len_string = strlen(allRes[i].name);
+        for (j = len_string; j < size_string; j++) {
+            allRes[i].name[j] = 0;
+        }
+        size_string = sizeof(allRes[i].des);
+        len_string = strlen(allRes[i].des);
+        for (j = len_string; j < size_string; j++) {
+            allRes[i].des[j] = 0;
+        }
+    }
+    
+    PyObject * resRst = PyList_New(allInfo->nRes);
+    for (i = 0; i < allInfo->nRes; i++) {
+        PyObject *o = SWIG_NewPointerObj(SWIG_as_voidptr(&allRes[i]),
+                                      SWIGTYPE_p_resItem, 0 | 0);
+        PyList_SetItem(resRst,i,o);
+    }
+    PyDict_SetItemString(result, "resTable", resRst);
+
+    PyObject * typeRst = PyList_New(allInfo->nTypes);
+    for (i = 0; i < allInfo->nTypes; i++) {
+        type = strdup(allInfo->hostTypes[i]);
+        int size_string = sizeof(type);
+        int len_string = strlen(type);
+        for (j = len_string; j < size_string; j++) {
+            type[j] = 0;
+        }
+        PyObject * pyType = Py_BuildValue("s",type);
+        PyList_SetItem(typeRst,i,pyType);
+        if (type != NULL) {
+            free(type);
+        }
+    }
+    PyDict_SetItemString(result, "hostTypes", typeRst);
+
+    PyObject * modelRst = PyList_New(allInfo->nModels);
+    PyObject * archRst = PyList_New(allInfo->nModels);
+    PyObject * refRst = PyList_New(allInfo->nModels);
+    PyObject * factorRst = PyList_New(allInfo->nModels);
+
+    for (i = 0; i < allInfo->nModels; i++) {
+        model = strdup(allInfo->hostModels[i]);
+        int size_string = sizeof(model);
+        int len_string = strlen(model);
+        for (j = len_string; j < size_string; j++) {
+            model[j] = 0;
+        }
+        PyObject *pyModel = Py_BuildValue("s",model);
+        PyList_SetItem(modelRst,i,pyModel);
+
+        arch = strdup(allInfo->hostArchs[i]);
+        size_string = sizeof(arch);
+        len_string = strlen(arch);
+        for (j = len_string; j < size_string; j++) {
+            arch[j] = 0;
+        }
+        PyObject *pyArch = Py_BuildValue("s",arch);
+        PyList_SetItem(archRst,i,pyArch);
+
+        PyObject *pyRef = Py_BuildValue("i",allInfo->modelRefs[i]);
+        PyList_SetItem(refRst,i,pyRef);
+
+        PyObject *pyFactor = Py_BuildValue("f",allInfo->cpuFactor[i]);
+        PyList_SetItem(factorRst,i,pyFactor);
+    }
+    
+    PyDict_SetItemString(result,"hostModels",modelRst);
+    PyDict_SetItemString(result,"hostArchs",archRst);
+    PyDict_SetItemString(result,"modelRefs",refRst);
+    PyDict_SetItemString(result,"cpuFactor",factorRst);
+    
+    return result;
+}
+
 
 PyObject * get_queue_info_by_name(char** name, int num) {
     struct queueInfoEnt* queueinfo;
