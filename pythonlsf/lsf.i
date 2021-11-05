@@ -463,35 +463,6 @@ PyObject * ls_load_py(char *resreq, int *numhosts, int options, char *fromhost) 
     return result;
 }
 
-PyObject * ls_load_py(char *resreq, int *numhosts, int options, char *fromhost) {
-
-    struct hostLoad * hosts = NULL; 
-    int i = 0, j = 0;
-
-    hosts = ls_load(resreq, numhosts, options, fromhost); 
-
-    if (hosts == NULL) { 
-        ls_perror("ls_load_py"); 
-        exit(-1); 
-    }
-
-    /* Python3 can not handle dirty string.*/
-    for (i = 0; i < *numhosts; i++) {
-        int size_string = sizeof(hosts[i].hostName);
-        int len_string  = strlen(hosts[i].hostName);
-        for ( j = len_string; j < size_string; j++) hosts[i].hostName[j] = 0;
-    }
-
-    PyObject * result = PyList_New(*numhosts);
-    for (i = 0; i < *numhosts; i++) {
-        PyObject *o = SWIG_NewPointerObj(SWIG_as_voidptr(&hosts[i]),
-                                         SWIGTYPE_p_hostLoad, 0 |  0 );
-        PyList_SetItem(result,i,o);
-    }
-
-    return result;
-}
-
 PyObject * ls_info_py() {
     struct resItem * allRes = NULL;
     struct lsInfo * allInfo = NULL;
