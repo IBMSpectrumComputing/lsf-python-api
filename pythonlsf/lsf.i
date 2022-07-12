@@ -708,5 +708,5 @@ PyObject * get_pids_from_stream(struct jRusage * jrusage) {
     }
     return result;
 }      
-      
+
 %}
