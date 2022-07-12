@@ -696,4 +696,17 @@ char * get_lsb_sysmsg() {
     return lsb_sysmsg();
 }
 
+PyObject * get_pids_from_stream(struct jRusage * jrusage) {
+    struct pidInfo *pidInfo;
+    pidInfo = jrusage->pidInfo;
+    int i = 0;
+    PyObject *result = PyList_New(jrusage->npids);
+    for (i = 0; i < jrusage->npids; i++) {
+        PyObject *o = SWIG_NewPointerObj(SWIG_as_voidptr(&pidInfo[i]),
+                                         SWIGTYPE_p_pidInfo, 0 | 0 );
+        PyList_SetItem(result, i, o);
+    }
+    return result;
+}      
+      
 %}
