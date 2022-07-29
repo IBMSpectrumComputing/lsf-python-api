@@ -707,6 +707,25 @@ PyObject * get_pids_from_stream(struct jRusage * jrusage) {
         PyList_SetItem(result, i, o);
     }
     return result;
-}      
+}
+
+PyObject * get_host_info_all() {
+    struct hostInfoEnt *hostinfo;
+    char **hosts = NULL;
+    int numhosts = 0;
+
+    // Return queries as C hostInfoEnt*
+    hostinfo = lsb_hostinfo(hosts, &numhosts);
+
+    PyObject *result = PyList_New(numhosts);     // Create PyObject * to get C returns
+    int i;
+    for (i = 0; i < numhosts; i++) {             // Save queries in a loop to result
+        PyObject *o = SWIG_NewPointerObj(SWIG_as_voidptr(&hostinfo[i]),
+                                         SWIGTYPE_p_hostInfoEnt, 0 | 0 );
+        PyList_SetItem(result,i,o);
+    }
+
+    return result;
+}
       
 %}
