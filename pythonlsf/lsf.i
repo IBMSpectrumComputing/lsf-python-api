@@ -32,8 +32,10 @@ int fclose(FILE *f);
 %pointer_functions(long, longp)
 %pointer_functions(LS_LONG_INT, LS_LONG_INT_POINTER)
 %pointer_functions(limitInfoEnt *, limitInfoEntPtrPtr)
+%pointer_functions(guaranteedResourcePoolEnt *, guaranteedResourcePoolEntPtrPtr)
 
 %allocators(limitInfoEnt *, limitInfoEntPtrPtr);
+%allocators(guaranteedResourcePoolEnt *, guaranteedResourcePoolEntPtrPtr);
 
 %array_functions(int, intArray)
 %array_functions(float, floatArray)
@@ -47,6 +49,7 @@ int fclose(FILE *f);
 %array_functions(struct gpuRusage, gpuRusageArray)
 #endif
 %array_functions(LS_LONG_INT, LS_LONG_INTArray)
+%array_functions(guaranteedResourcePoolEnt, guaranteedResourcePoolEntArray)
 
 //helper function for transforming char** to python list
 %inline %{
@@ -708,5 +711,5 @@ PyObject * get_pids_from_stream(struct jRusage * jrusage) {
     }
     return result;
 }      
-      
+
 %}
