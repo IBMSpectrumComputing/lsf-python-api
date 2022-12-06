@@ -1,7 +1,12 @@
 from pythonlsf import lsf
 
 
-def get_job_info(jobid: int) -> lsf.jobInfoEnt:
+def get_single_job_info(jobid: int) -> lsf.jobInfoEnt:
+    """
+    Get the jobInfoEnt struct for a single lsf job using its jobId
+
+    This function does not work for array jobs, only single jobs
+    """
     if lsf.lsb_init("job_info") > 0:
         print("could not initialise the api")
         return
@@ -25,7 +30,7 @@ def get_job_info(jobid: int) -> lsf.jobInfoEnt:
 
 if __name__ == "__main__":
     id = input("enter a job id:\n")
-    job_info = get_job_info(int(id))
+    job_info = get_single_job_info(int(id))
 
     print(f"job id: {job_info.jobId}\njob name: {job_info.jName}\n"
           f"status: {job_info.status:#x}")
