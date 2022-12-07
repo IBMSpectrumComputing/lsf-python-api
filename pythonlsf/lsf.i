@@ -50,6 +50,8 @@ int fclose(FILE *f);
 #endif
 %array_functions(LS_LONG_INT, LS_LONG_INTArray)
 %array_functions(guaranteedResourcePoolEnt, guaranteedResourcePoolEntArray)
+%array_functions(struct rsvInfoEnt, rsvInfoEntArray)
+%array_functions(struct hostRsvInfoEnt, hostRsvInfoEntArray)
 
 //helper function for transforming char** to python list
 %inline %{
