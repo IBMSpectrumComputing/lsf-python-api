@@ -715,20 +715,6 @@ PyObject * get_pids_from_stream(struct jRusage * jrusage) {
     return result;
 }
 
-long * buildQueryColIndexs() {
-    long * colIndexs = NULL;
-    int i = 0;
-
-    colIndexs = calloc(113, sizeof(long));
-    for (i= 0; i < 113; i++) {
-        colIndexs[i] = i;
-    }
-    colIndexs[1] = 2;
-    colIndexs[2] = 1;
-    colIndexs[9] = 10;
-    return colIndexs;
-}
-
 PyObject * get_host_info_all() {
     struct hostInfoEnt *hostinfo;
     char **hosts = NULL;
