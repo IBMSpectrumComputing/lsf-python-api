@@ -50,6 +50,9 @@ int fclose(FILE *f);
 #endif
 %array_functions(LS_LONG_INT, LS_LONG_INTArray)
 %array_functions(guaranteedResourcePoolEnt, guaranteedResourcePoolEntArray)
+%array_functions(struct rsvInfoEnt, rsvInfoEntArray)
+%array_functions(struct hostRsvInfoEnt, hostRsvInfoEntArray)
+%array_functions(struct hRusage, hRusageArray)
 
 //helper function for transforming char** to python list
 %inline %{
@@ -710,7 +713,7 @@ PyObject * get_pids_from_stream(struct jRusage * jrusage) {
         PyList_SetItem(result, i, o);
     }
     return result;
-}      
+}
 
 long * buildQueryColIndexs() {
     long * colIndexs = NULL;
@@ -726,4 +729,23 @@ long * buildQueryColIndexs() {
     return colIndexs;
 }
 
+PyObject * get_host_info_all() {
+    struct hostInfoEnt *hostinfo;
+    char **hosts = NULL;
+    int numhosts = 0;
+
+    // Return queries as C hostInfoEnt*
+    hostinfo = lsb_hostinfo(hosts, &numhosts);
+
+    PyObject *result = PyList_New(numhosts);     // Create PyObject * to get C returns
+    int i;
+    for (i = 0; i < numhosts; i++) {             // Save queries in a loop to result
+        PyObject *o = SWIG_NewPointerObj(SWIG_as_voidptr(&hostinfo[i]),
+                                         SWIGTYPE_p_hostInfoEnt, 0 | 0 );
+        PyList_SetItem(result,i,o);
+    }
+
+    return result;
+}
+      
 %}
