@@ -47,9 +47,9 @@ def run_job(command):
 
     submit_ext.keys = lsf.new_intArray(len(gpuOpt))
     submit_ext.values = lsf.new_stringArray(len(gpuOpt))
-    for i in range(len(gpuOpt)):
-        lsf.intArray_setitem(submit_ext.keys, i, gpuOpt.keys()[i])
-        lsf.stringArray_setitem(submit_ext.values, i, gpuOpt.values()[i])
+    for i, (key, value) in enumerate(gpuOpt.items()):
+        lsf.intArray_setitem(submit_ext.keys, i, key)
+        lsf.stringArray_setitem(submit_ext.values, i, value)
     submit_ext.num = len(gpuOpt)
     submitreq.submitExt = submit_ext
     print(submitreq.submitExt.num)
