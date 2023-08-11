@@ -36,7 +36,7 @@ def get_job_info(list) :
         if jobInfoPtr.jobInfoHead != None :
             foundJob = True
     if not foundJob :
-        print("faild to query jobs")
+        print("failed to query jobs")
     else :
         print("found job number : {}".format(jobInfoPtr.jobInfoHead.numJobs))
         if jobInfoPtr.jobInfoHead.numJobs > 0 :
@@ -51,10 +51,12 @@ def get_job_info(list) :
 
 if __name__ == "__main__":
     joblist = []
-    if len(sys.argv) < 2:
-        joblist = ['0']
-    else:
+    if len(sys.argv) >= 2:
         for jobid in sys.argv[1:]:
             joblist.append(jobid)
-    joblist = ['3530','3531']
+    if len(joblist) == 0 :
+        print("usage: \n    {} job1\n    {} job1 job2 job3 ...\n".format(sys.argv[0],sys.argv[0]))
+        exit()
+    print("get job info for: ", joblist)
     get_job_info(joblist)
+
