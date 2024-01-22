@@ -53,6 +53,7 @@ int fclose(FILE *f);
 %array_functions(struct rsvInfoEnt, rsvInfoEntArray)
 %array_functions(struct hostRsvInfoEnt, hostRsvInfoEntArray)
 %array_functions(struct hRusage, hRusageArray)
+%array_functions(struct hostInfo, hostInfoArray)
 
 //helper function for transforming char** to python list
 %inline %{
