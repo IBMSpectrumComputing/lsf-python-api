@@ -43,7 +43,7 @@ def get_job_info(list) :
     req = lsf.jobInfoReq()
     req.reasonLevel = reasonLevel
     req.sourceClusterName = clusterName
-    req.user = "all"
+    req.userName = "all"
     req.options = lsf.ALL_JOB
     if len(list) > 1 :
         req.jobId = 0
