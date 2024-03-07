@@ -51,7 +51,7 @@ gccflag_lsfversion = '-DNOLSFVERSION'
 def set_gccflag_lsf_version():
     global gccflag_lsfversion 
     _lsf_envdir = os.environ['LSF_ENVDIR']
-    with open('{}/lsf.conf'.format(_lsf_envdir), 'r') as f:
+    with open('{0}/lsf.conf'.format(_lsf_envdir), 'r') as f:
         _lsf_version = re.search('LSF_VERSION=(.*)', f.read()).group(1).strip() 
     if _lsf_version == '10.1' :
         gccflag_lsfversion= '-DLSF_VERSION_101'
