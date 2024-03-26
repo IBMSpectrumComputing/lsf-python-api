@@ -42,7 +42,7 @@ Please note you must use lsf.lsb_init before any other LSBLIB library routine in
 
         Supported operating systems: 
 		Linux 2.6 glibc 2.3 x86 64 bit: RHEL 6.2, RHEL6.4, RHEL6.5, RHEL6.8
-		Linux 3.10 glibc 2.17 x86 64 bit: Red Hat 7.4, 7.5
+		Linux 3.10 glibc 2.17 x86 64 bit: Red Hat 7.4, 7.5, 8.8, 8.9
 		Linux for Power Systems Servers 8 Little Endian (Linux 3.10, glibc 2.17): RHEL 7.4
 		Linux for Power Systems Servers 9 Little Endian (Linux 4.14, glibc 2.17): RHEL 7.5
 
@@ -58,7 +58,7 @@ Please note you must use lsf.lsb_init before any other LSBLIB library routine in
         Python2 and Python3 are all supported.
 
 	The following versions are tested:
-		Python 2.6.6, 2.7.15, 3.0, 3.6.0, 3.7.0
+		Python 2.6.6, 2.7.15, 3.0, 3.6.0, 3.7.0, 3.12.2
 
 ## Compatibility
 
@@ -73,6 +73,10 @@ Please note you must use lsf.lsb_init before any other LSBLIB library routine in
 Before compiling the library, set the LSF environment variables:
 
 `$ source profile.lsf`
+
+If using python version higher than 3.10, distutils has been deprecated, install setuptools:
+
+`$ pip3 install setuptools`
 
 To compile and install the library, go to the main source directory
 and type:
@@ -89,6 +93,7 @@ To instead build an RPM:
 or `$ python3 setup.py bdist_rpm`
 
 Resulting RPMs will be placed in the dist directory
+
 
 ## Release Notes
 

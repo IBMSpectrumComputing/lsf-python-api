@@ -8,7 +8,10 @@
 # 
 import os, sys, re
 import time
-from distutils.core import setup, Extension
+if sys.version_info >= (3,10):
+    from setuptools import setup, Extension
+else:
+    from distutils.core import setup, Extension
 from distutils.command.bdist_rpm import bdist_rpm
 from distutils.command.install import INSTALL_SCHEMES
 
