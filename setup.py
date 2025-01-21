@@ -13,6 +13,7 @@ if sys.version_info >= (3,10):
 else:
     from distutils.core import setup, Extension
 from distutils.command.bdist_rpm import bdist_rpm
+from distutils.command.build import build
 from distutils.command.install import INSTALL_SCHEMES
 
 class bdist_rpm_custom(bdist_rpm):
@@ -27,6 +28,21 @@ class bdist_rpm_custom(bdist_rpm):
             # Disable autoreq in case LSF is installed from a tarball
             self.no_autoreq = 1
             bdist_rpm.finalize_package_data(self)
+
+# Build extensions before python modules, so the generated pythonlsf/lsf.py
+# file is created before attempting to install it.  This makes building with
+# "pip" easier.
+# See:
+# https://bugs.python.org/issue2624
+# https://bugs.python.org/issue1016626
+# https://stackoverflow.com/questions/12491328/python-distutils-not-include-the-swig-generated-module
+# https://stackoverflow.com/questions/50239473/building-a-module-with-setuptools-and-swig
+
+class build_ext_first(build):
+    def finalize_options(self):
+        super().finalize_options()
+        new_order = list(filter(lambda x: x[0] == 'build_ext', self.sub_commands)) + list(filter(lambda x: x[0] != 'build_ext', self.sub_commands))
+        self.sub_commands[:] = new_order
 
 def get_lsf_libdir():
     try:
@@ -145,7 +161,8 @@ setup(name='lsf-pythonapi',
                                extra_objects=lsf_static_lib,
                                libraries=lsf_dynamic_lib)],
       py_modules=['pythonlsf.lsf'],
-      cmdclass = { 'bdist_rpm': bdist_rpm_custom },
+      cmdclass = { 'bdist_rpm': bdist_rpm_custom,
+                   'build': build_ext_first },
       classifiers=["Development Status :: 2 - Pre-Alpha",
                      "License :: OSI Approved :: Eclipse Public License",
                      "Operating System :: OS Independent",
