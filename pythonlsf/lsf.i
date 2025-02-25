@@ -25,6 +25,7 @@ int fclose(FILE *f);
 #include "lsf.h"
 #include "lsbatch.h"
 #include "lib.table.h"
+extern struct gpuJobData* str2GpuJobData(char *str);
 %}
 
 %pointer_functions(int, intp)
@@ -47,6 +48,10 @@ int fclose(FILE *f);
 %array_functions(struct shareAcctInfoEnt, shareAcctInfoEntArray)
 #ifdef LSF_VERSION_101
 %array_functions(struct gpuRusage, gpuRusageArray)
+%array_functions(struct gpuJobHostData, gpuJobHostDataArray)
+%array_functions(struct gpuTaskData, gpuTaskDataArray)
+%array_functions(struct gpuData *, gpuDataArray)
+%array_functions(struct migData, migDataArray)
 #endif
 %array_functions(LS_LONG_INT, LS_LONG_INTArray)
 %array_functions(guaranteedResourcePoolEnt, guaranteedResourcePoolEntArray)
@@ -702,6 +707,9 @@ int get_lsb_errno() {
 
 char * get_lsb_sysmsg() {
     return lsb_sysmsg();
+}
+struct gpuJobData* get_str2GpuJobData(char *str) {
+    return str2GpuJobData(str);
 }
 
 PyObject * get_pids_from_stream(struct jRusage * jrusage) {
