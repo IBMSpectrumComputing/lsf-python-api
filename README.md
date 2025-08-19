@@ -53,7 +53,7 @@ Please note you must use lsf.lsb_init before any other LSBLIB library routine in
 	The following versions are tested:
 		SWIG: 2.0.10, 3.0.12
         
-    If isntalling SWIG with pip or pip3, please specify 3.0.12 version.
+    If installing SWIG with pip or pip3, please specify 3.0.12 version.
     `$ pip3 install swig==3.0.12`
 
  - Python
