@@ -1,6 +1,6 @@
 # LSF Python API
 
-These python wrappers allow customers to submit and control jobs and obtain status of queues, hosts and other LSF attributes from Python directly.  They work with various versions of LSF and are maintained by LSF developement, though we take contributions from the Open Source community.
+These python wrappers allow customers to submit and control jobs and obtain status of queues, hosts and other LSF attributes from Python directly.  They work with various versions of LSF and are maintained by LSF development, though we take contributions from the Open Source community.
 
 If you plan or would like to contribute to the library, you must follow the DCO process in the attached [DCO Readme file](https://github.com/IBMSpectrumComputing/platform-python-lsf-api/blob/master/IBMDCO.md) in the root of this repository.  It essentially requires you to provide a Sign Off line in the notes of your pull request stating that the work is clear of infinging work by others.  Again, for more details, please see the DCO Readme file.
 
@@ -179,3 +179,4 @@ IBM(R), the IBM logo and ibm.com(R) are trademarks of International Business Mac
 registered in many jurisdictions worldwide. Other product and service names might be trademarks 
 of IBM or other companies. A current list of IBM trademarks is available on the Web at 
 "Copyright and trademark information" at www.ibm.com/legal/copytrade.shtml.
+
