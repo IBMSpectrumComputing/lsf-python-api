@@ -200,6 +200,11 @@ static void stringArray_setitem(char * *ary, size_t index, char * value) {
 %array_class(struct _limitItem, limitItemArray)
 %array_class(struct _limitConsumer, limitConsumerArray)
 %array_class(struct _limitResource, limitResourceArray)
+#ifdef LSF_VERSION_101
+%array_class(struct hostGpuInfo, hostGpuInfoArray)
+%array_class(struct hostGpuAttr, hostGpuAttrArray)
+%array_class(struct hostGpuLoad, hostGpuLoadArray)
+#endif
 
 // handle int arrays
 %typemap(in) int [ANY] (int temp[$1_dim0]) {
