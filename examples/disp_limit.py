@@ -28,4 +28,5 @@ def printLimit():
     
 if __name__ == '__main__':
     print("LSF Clustername is : {}".format(lsf.ls_getclustername()))
+    lsf.set_limit_filter_flag(True)
     printLimit()

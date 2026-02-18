@@ -26,6 +26,8 @@ int fclose(FILE *f);
 #include "lsbatch.h"
 #include "lib.table.h"
 extern struct gpuJobData* str2GpuJobData(char *str);
+typedef int bool_t;
+extern void setbConfigInfoFlag4Lib(bool_t bConfigInfo);
 %}
 typedef long off_t;
 
@@ -245,6 +247,16 @@ static void stringArray_setitem(char * *ary, size_t index, char * value) {
 
 %typemap(arginit) time_t {
    $1 = 0;
+}
+
+%typemap(in) bool_t {
+    if (PyBool_Check($input)) {
+        $1 = (bool_t)(($input == Py_True) ? 1 : 0);
+    } else if (PyLong_Check($input)) {
+        $1 = (bool_t)PyLong_AsLong($input);
+    } else {
+        $1 = (bool_t)0;
+    }
 }
 
 /* 
@@ -765,4 +777,8 @@ PyObject * get_host_info_all() {
     return result;
 }
       
+void set_limit_filter_flag(bool_t bConfigInfo) {
+    setbConfigInfoFlag4Lib(bConfigInfo);
+}
+
 %}
