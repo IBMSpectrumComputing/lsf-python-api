@@ -3,12 +3,14 @@ from pythonlsf import lsf
 def printLimitItem(name, item):
    print(name+' :')
    print('   consumerC : {}'.format(item.consumerC))
-   consumers = lsf.limitConsumerArray_frompointer(item.consumerV)
+   consumers = lsf.limitConsumerArray(item.consumerC)
+   consumers = consumers.frompointer(item.consumerV)
    for j in range (item.consumerC) :
        print('       [{}] type : {}'.format(j, consumers[j].type))
        print('       [{}] name : {}'.format(j, consumers[j].name))
    print('   resourceC : {}'.format(item.resourceC))
-   resources = lsf.limitResourceArray_frompointer(item.resourceV)
+   resources = lsf.limitResourceArray(item.resourceC)
+   resources= resources.frompointer(item.resourceV)
    for j in range (item.resourceC) :
        print('       [{}] name : {}'.format(j, resources[j].name))
        print('       [{}] type : {}'.format(j, resources[j].type))
@@ -47,7 +49,8 @@ def printLimit():
        # print usageC in the limit
        print('usageC : {}'.format(ent.usageC))
        # print usageInfo in the limit
-       all_usageInfo = lsf.limitItemArray_frompointer(ent.usageInfo)
+       all_usageInfo = lsf.limitItemArray(ent.usageC)
+       all_usageInfo = all_usageInfo.frompointer(ent.usageInfo)
        for j in range (ent.usageC) :
            printLimitItem('usageInfo', all_usageInfo[j])
 

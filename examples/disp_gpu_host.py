@@ -5,7 +5,9 @@ if __name__ == '__main__':
    num_hosts = lsf.new_intp()
    lsf.intp_assign(num_hosts, 0)
    hosts = lsf.ls_gethostgpuinfo(None, num_hosts, None, 0, 0)
-   hostGpuInfos = lsf.hostGpuInfoArray_frompointer(hosts)
+ 
+   hostGpuInfos = lsf.hostGpuInfoArray(lsf.intp_value(num_hosts))
+   hostGpuInfos = hostGpuInfos.frompointer(hosts)
    for i in range(0, lsf.intp_value(num_hosts)):
      hostGpuInfo = hostGpuInfos[i]
      print("Host: {}". format(hostGpuInfo.hostName))
@@ -14,8 +16,10 @@ if __name__ == '__main__':
         continue
      gpuAttrData = hostGpuInfo.gpuAttrV
      gpuLoadData = hostGpuInfo.gpuLoadV
-     gpuAttrs = lsf.hostGpuAttrArray_frompointer(gpuAttrData)
-     gpuLoads = lsf.hostGpuLoadArray_frompointer(gpuLoadData)
+     gpuAttrs = lsf.hostGpuAttrArray(numGpus)
+     gpuAttrs = gpuAttrs.frompointer(gpuAttrData)
+     gpuLoads = lsf.hostGpuLoadArray(numGpus)
+     gpuLoads = gpuLoads.frompointer(gpuLoadData)
      print("      gBrand     gModel   gBusId       gMode  gUsedMem  gStatus")
      for j in range(0, numGpus):
         print("      {} {} {} {} {} {} ". \
